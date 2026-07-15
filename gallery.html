@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Impact Gallery | NOVA Nourish Foundation</title>
+  <meta name="description" content="Explore the photographic story of NOVA Nourish Foundation's impact across Bangladesh through our Impact Gallery."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .gallery-hero {
+      padding: 140px 0 64px;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-container-low) 100%);
+      text-align: center;
+    }
+
+    .gallery-filter {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .gallery-masonry {
+      columns: 1;
+      column-gap: var(--gutter);
+    }
+
+    @media (min-width: 640px) { .gallery-masonry { columns: 2; } }
+    @media (min-width: 1024px) { .gallery-masonry { columns: 3; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: var(--gutter);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,26,16,0.8) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-inner {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: var(--radius-xl);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .lightbox-caption {
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition-base);
+    }
+
+    .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+    .lightbox-prev { left: -72px; }
+    .lightbox-next { right: -72px; }
+
+    .stats-banner {
+      background: var(--primary);
+      padding: 48px 0;
+    }
+
+    .stats-banner-inner {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .banner-stat {
+      text-align: center;
+      color: white;
+    }
+
+    .banner-stat-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .banner-stat-lbl {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+      <span class="nav-logo-text">NOVA Nourish</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="volunteer.html" class="nav-link">Volunteer</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-lang">EN / BN</button>
+      <a href="donate.html" class="btn btn-gold btn-sm">Donate Now</a>
+      <button class="nav-hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="volunteer.html">Volunteer</a>
+    <a href="donate.html">Donate Now →</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="gallery-hero">
+    <div class="container fade-up">
+      <span class="badge badge-primary" style="margin-bottom:20px;">Visual Stories</span>
+      <h1 class="headline-xl" style="color:var(--text-primary);margin-bottom:16px;">Impact Gallery</h1>
+      <p class="body-lg" style="color:var(--text-secondary);max-width:500px;margin-inline:auto;">
+        Every photograph tells the story of a family, a child, a community transformed by science and compassion.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS BANNER -->
+  <div class="stats-banner">
+    <div class="container">
+      <div class="stats-banner-inner">
+        <div class="banner-stat fade-up">
+          <span class="banner-stat-num" data-counter="240" data-suffix="+">240+</span>
+          <span class="banner-stat-lbl">Photos Documented</span>
+        </div>
+        <div class="banner-stat fade-up">
+          <span class="banner-stat-num" data-counter="12">12</span>
+          <span class="banner-stat-lbl">Villages Visited</span>
+        </div>
+        <div class="banner-stat fade-up">
+          <span class="banner-stat-num" data-counter="3">3</span>
+          <span class="banner-stat-lbl">Years of Coverage</span>
+        </div>
+        <div class="banner-stat fade-up">
+          <span class="banner-stat-num" data-counter="5">5</span>
+          <span class="banner-stat-lbl">Award-Winning Stories</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <section class="section-py" style="background:var(--surface-muted);">
+    <div class="container">
+
+      <div class="gallery-filter fade-up">
+        <button class="filter-btn active" data-gfilter="all">All</button>
+        <button class="filter-btn" data-gfilter="field">Field Work</button>
+        <button class="filter-btn" data-gfilter="community">Community</button>
+        <button class="filter-btn" data-gfilter="science">Science</button>
+        <button class="filter-btn" data-gfilter="youth">Youth Fellows</button>
+      </div>
+
+      <div class="gallery-masonry" id="galleryGrid">
+
+        <div class="gallery-item fade-up" data-gcat="field" data-caption="Volunteer team conducting nutrition assessments in Bagerhat District, 2023">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBTXYB3PmVVsA65EpH0yu2wD2PVcxxS2-tlyewOhMVkp5DdInSo5f9weD9unJsKwY8KBBNVjA_dnQlNUIyz3Yk8U1nmPmdtJmdy0PYwAOcxdt8chG1kPO8Q1nWOdSLEd5hv7HKhZppSFyx9cgdrdQtNBrjgmQyXGfH_pHsq3jmKLDMdcm7dE0BRoehCAABHiq76QTZILO1c1kc7PM6K-hoFXTjfvEhBGjqoZkvxMwD9HAFRDnZTNfobTZFQXz-p9TZYun3v_5oNPI" alt="Field volunteers" loading="lazy"/>
+          <div class="gallery-overlay">
+            <p class="gallery-caption">Volunteer team conducting nutrition assessments, Bagerhat 2023</p>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-up" data-gcat="science" data-caption="Bio-fortification lab processing micronutrient supplements for rural distribution">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXBt4wXuzj8_GYcXs_EPq-G1eAjLkIwF33oSTRlIxH8JdP_9rLheKa-YvYb-2NdClm6Gt7BPWsdRiCoOui3PNEXyvCAtSvVDqD6OreBZ6gZTSU8JgOWySb5Mc4iH7dzdpmEiQG2urQ7rrjzF8N6nkkzWaVpzNjdP3rsHtUwnF-KMByS659V-BKdotnstyBJrzY8rQX3OeDllL5arZoLlD39KIn-_bEg_GkW6gRO-78n2JYTlceEkhJS6kEdnxSSka8HdLW-ITgq4s" alt="Bio-fortification lab" loading="lazy"/>
+          <div class="gallery-overlay">
+            <p class="gallery-caption">Bio-fortification lab processing micronutrient supplements</p>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-up" data-gcat="community" data-caption="Community health session led by Youth Science Fellows, Morrelganj 2024">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmVN7VFUfvJsyRuearQA3GS1THrMUXbJW_4u5rDK7hetU_1_HsofrPCQ3iTUgLUw_G95UMQ0HvymIUCNmdmGSgpWUXPIywuI-fzRUwP0jj_HsTDVmOC3ryBNAH5k50oHQ5INCkKXa2ne089wlvmHuiNJCvaL-VkZOnE0boJDoHnjSO9iM23B_kL5hlkGZ4MIYPlEJ3x53z9DzLq7d_ks9gcv5IjTRogEbM46Bm8AAzkNbtDx5iQCX2WP7msvz00flRfHXBKWEweU" alt="Community health session" loading="lazy"/>
+          <div class="gallery-overlay">
+            <p class="gallery-caption">Community health session, Morrelganj 2024</p>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-up" data-gcat="field" data-caption="Logistics for Life delivery vehicles leaving the distribution hub at dawn">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK1VlghXkYqtiwIDotgwrl1umMYbzZy57DvGfhTlB4wa_IMFCyNgMa_1fpzyIwB9jJdzqdM25dffkyjRFM3GKykLjJYL2FYbNWLcRKP8D-jmTZvpc_3zKiveWT4G3pQkF-I4D1FOD0k4KBPvOI_gOAK3Z7GzsMrmE-eoud_Y0U7ddKlJOcY3FQmnyBOYIwgfG8F98ehpJ1v_1MXskUEnWFogFk5HPTqEi5l5w9teb_b220ERcJKA2VakDOVYbLo_O4diaFIZR1Dro" alt="Delivery vehicles" loading="lazy"/>
+          <div class="gallery-overlay">
+            <p class="gallery-caption">Logistics for Life delivery vehicles at dawn, Bagerhat 2024</p>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-up" data-gcat="youth" data-caption="Youth Science Fellows presenting research findings at the Dhaka Health Summit 2023">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrpS5oQeC-VhASJ14VauLe0x0gGt3Ao8zq9hxq4IVRIz8l4gAW-LZEVVOSflX_uXPaS7jEKmc140yzyNw3lKYZ938j7-UIo43ceJA6Ht_vaJfPpWHYGCfypIS65fHVieCksJBbFKXMvd6DSFMUMBIvJjGxO6eMUJOlwMlHNl06a9Q0fGWvyx_2sJAAkjJdjxZ941w2RSgRAFIY1PSNhszsTUElpXVQeF3YbZpN34TIN1XG0RnODhmo2Lovs1vaeEEA-HbxfYSh70" alt="Youth Fellows presenting" loading="lazy"/>
+          <div class="gallery-overlay">
+            <p class="gallery-caption">Youth Science Fellows at Dhaka Health Summit 2023</p>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-up" data-gcat="community" data-caption="A mother from Shyamnagar receiving her family's monthly nutrition kit, 2024">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxzsqzF_DIHdp_VWdvyMIVjUqG60GajgU_stWAIOoXpTNrarECflhEwpxwRFpGr2Kq2CulIi7rTLFRnDSaee76exoOHMpJpLabC1iK3uuF7JpOCCzqlwRPggHbCvhp19_TiD3MO67_vue2jydFqJpal7FJcLmm6OFRs1V4mtqJcMzy5ULZo1tysZMKIABPP8TbQSux2ewZazutrTQNYMF5XhEk2reCfc2m0MoZPBdZixJ9PJGWAslrxHEtfIB9SXHRpVcq0j6o71s" alt="Mother receiving nutrition kit" loading="lazy"/>
+          <div class="gallery-overlay">
+            <p class="gallery-caption">Monthly nutrition kit distribution, Shyamnagar 2024</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO SECTION -->
+  <section class="section-py" style="background:var(--surface-base);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">Documentary</span>
+        <h2 class="headline-xl">The Science Behind the Story</h2>
+        <p class="body-lg">Watch our 8-minute documentary on the Bio-Fortification Labs program.</p>
+      </div>
+      <div class="fade-up" style="max-width:800px;margin:0 auto;border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-soft);">
+        <div style="position:relative;aspect-ratio:16/9;background:#0a1a10;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrpS5oQeC-VhASJ14VauLe0x0gGt3Ao8zq9hxq4IVRIz8l4gAW-LZEVVOSflX_uXPaS7jEKmc140yzyNw3lKYZ938j7-UIo43ceJA6Ht_vaJfPpWHYGCfypIS65fHVieCksJBbFKXMvd6DSFMUMBIvJjGxO6eMUJOlwMlHNl06a9Q0fGWvyx_2sJAAkjJdjxZ941w2RSgRAFIY1PSNhszsTUElpXVQeF3YbZpN34TIN1XG0RnODhmo2Lovs1vaeEEA-HbxfYSh70" alt="Documentary thumbnail" style="width:100%;height:100%;object-fit:cover;"/>
+          <div style="position:absolute;inset:0;background:rgba(0,107,47,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;" id="videoPlayBtn">
+            <div style="width:80px;height:80px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);transition:transform 0.2s;">
+              <span class="material-symbols-outlined" style="font-size:44px;color:var(--primary);">play_arrow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">
+      <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f" opacity="0.6"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+          <span class="footer-brand-name">NOVA Nourish</span>
+        </div>
+        <p class="footer-tagline">Empowering global nutrition through science and youth-led innovation.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Explore</h4>
+        <nav class="footer-links"><a href="programs.html">Programs</a><a href="about.html">About</a><a href="gallery.html">Gallery</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Connect</h4>
+        <nav class="footer-links"><a href="volunteer.html">Volunteer</a><a href="blog.html">Blog</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Support</h4>
+        <a href="donate.html" class="btn btn-primary w-full" style="justify-content:center;">Donate Now</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 NOVA Nourish Foundation.</p></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/yournumber" class="fab-whatsapp" aria-label="Chat on WhatsApp"><span class="material-symbols-outlined">chat</span></a>
+
+<script src="js/main.js"></script>
+<script>
+  // Gallery filter
+  const gFilterBtns = document.querySelectorAll('.filter-btn[data-gfilter]');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  gFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      gFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.gfilter;
+      galleryItems.forEach(item => {
+        const show = filter === 'all' || item.dataset.gcat === filter;
+        item.style.display = show ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Lightbox
+  let currentIndex = 0;
+  const images = Array.from(galleryItems);
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    const item = images[index];
+    const img = item.querySelector('img');
+    const caption = item.dataset.caption;
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = caption || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  galleryItems.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openLightbox(currentIndex);
+  });
+  document.getElementById('lightboxNext').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    openLightbox(currentIndex);
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
+    if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
+  });
+
+  // Video play
+  document.getElementById('videoPlayBtn').addEventListener('click', () => {
+    showToast('🎬 Video player would launch here.');
+  });
+</script>
+</body>
+</html>

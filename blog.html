@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nutrition Academy Blog | NOVA Nourish Foundation</title>
+  <meta name="description" content="Read the latest research insights, field reports, and nutrition science articles from the NOVA Nourish team."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .blog-hero {
+      padding: 140px 0 64px;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-container-low) 100%);
+      text-align: center;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gutter);
+    }
+
+    @media (min-width: 768px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .blog-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .blog-card {
+      background: var(--surface-base);
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--outline-variant);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .blog-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .blog-card:hover .blog-card-img {
+      transform: scale(1.05);
+    }
+
+    .blog-card-body {
+      padding: 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .blog-date {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      font-weight: 500;
+    }
+
+    .blog-read-time {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .blog-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .blog-excerpt {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .blog-read-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      transition: gap var(--transition-base);
+      text-decoration: none;
+      margin-top: auto;
+    }
+
+    .blog-read-link:hover {
+      gap: 10px;
+    }
+
+    /* Featured post */
+    .blog-featured {
+      background: var(--surface-base);
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-bottom: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .blog-featured { grid-template-columns: 1fr 1fr; }
+    }
+
+    .blog-featured-img {
+      height: 360px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .blog-featured-body {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .blog-featured-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .blog-featured-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    /* Sidebar */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    @media (min-width: 1024px) {
+      .blog-layout { grid-template-columns: 2fr 1fr; }
+    }
+
+    .sidebar-card {
+      background: var(--surface-base);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+    }
+
+    .sidebar-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .category-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--outline-variant);
+      cursor: pointer;
+      transition: color var(--transition-base);
+    }
+
+    .category-item:hover { color: var(--primary); }
+
+    .category-count {
+      background: var(--surface-container);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    .popular-post {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .popular-post img {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .popular-post-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .popular-post-date {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+      <span class="nav-logo-text">NOVA Nourish</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="volunteer.html" class="nav-link">Volunteer</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-lang">EN / BN</button>
+      <a href="donate.html" class="btn btn-gold btn-sm">Donate Now</a>
+      <button class="nav-hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="volunteer.html">Volunteer</a>
+    <a href="donate.html">Donate Now →</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <div class="container fade-up">
+      <span class="badge badge-primary" style="margin-bottom:20px;">Knowledge Hub</span>
+      <h1 class="headline-xl" style="color:var(--text-primary);margin-bottom:16px;">Nutrition Academy</h1>
+      <p class="body-lg" style="color:var(--text-secondary);max-width:520px;margin-inline:auto;">
+        Field insights, research briefs, and science-backed nutrition guides from our team of public health experts.
+      </p>
+    </div>
+  </section>
+
+  <!-- BLOG CONTENT -->
+  <section class="section-py" style="background:var(--surface-muted);">
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- Main content -->
+        <div>
+
+          <!-- Featured Post -->
+          <div class="blog-featured fade-up">
+            <img class="blog-featured-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBTXYB3PmVVsA65EpH0yu2wD2PVcxxS2-tlyewOhMVkp5DdInSo5f9weD9unJsKwY8KBBNVjA_dnQlNUIyz3Yk8U1nmPmdtJmdy0PYwAOcxdt8chG1kPO8Q1nWOdSLEd5hv7HKhZppSFyx9cgdrdQtNBrjgmQyXGfH_pHsq3jmKLDMdcm7dE0BRoehCAABHiq76QTZILO1c1kc7PM6K-hoFXTjfvEhBGjqoZkvxMwD9HAFRDnZTNfobTZFQXz-p9TZYun3v_5oNPI" alt="Featured article"/>
+            <div class="blog-featured-body">
+              <p class="blog-featured-tag">⭐ Featured Research</p>
+              <h2 class="blog-featured-title">How Bio-Fortified Rice Is Reducing Anaemia in Bagerhat by 34%</h2>
+              <p style="font-size:15px;color:var(--text-secondary);line-height:1.6;margin-bottom:24px;">
+                A 12-month longitudinal study across 400 households reveals remarkable haemoglobin improvements following systematic iron-fortified rice distribution. This is the definitive field report.
+              </p>
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+                <span class="badge badge-green">RESEARCH</span>
+                <span class="blog-date">July 2, 2024</span>
+                <span style="font-size:12px;color:var(--on-surface-variant);">12 min read</span>
+              </div>
+              <a href="#" class="btn btn-primary btn-sm">Read Full Study</a>
+            </div>
+          </div>
+
+          <!-- Blog Grid -->
+          <h3 class="headline-md" style="margin-bottom:32px;">Latest Articles</h3>
+          <div class="blog-grid">
+
+            <article class="blog-card fade-up">
+              <div style="overflow:hidden;">
+                <img class="blog-card-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXBt4wXuzj8_GYcXs_EPq-G1eAjLkIwF33oSTRlIxH8JdP_9rLheKa-YvYb-2NdClm6Gt7BPWsdRiCoOui3PNEXyvCAtSvVDqD6OreBZ6gZTSU8JgOWySb5Mc4iH7dzdpmEiQG2urQ7rrjzF8N6nkkzWaVpzNjdP3rsHtUwnF-KMByS659V-BKdotnstyBJrzY8rQX3OeDllL5arZoLlD39KIn-_bEg_GkW6gRO-78n2JYTlceEkhJS6kEdnxSSka8HdLW-ITgq4s" alt="Zinc deficiency article" loading="lazy"/>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-meta">
+                  <span class="badge badge-primary" style="font-size:11px;">NUTRITION</span>
+                  <span class="blog-date">June 18, 2024</span>
+                </div>
+                <h3 class="blog-title">Understanding Zinc Deficiency: The Silent Epidemic in Rural Bangladesh</h3>
+                <p class="blog-excerpt">Zinc deficiency affects nearly 40% of children under five in Southern Bangladesh. Here's what the science says and what we're doing about it.</p>
+                <a href="#" class="blog-read-link">Read Article <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></a>
+              </div>
+            </article>
+
+            <article class="blog-card fade-up">
+              <div style="overflow:hidden;">
+                <img class="blog-card-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmVN7VFUfvJsyRuearQA3GS1THrMUXbJW_4u5rDK7hetU_1_HsofrPCQ3iTUgLUw_G95UMQ0HvymIUCNmdmGSgpWUXPIywuI-fzRUwP0jj_HsTDVmOC3ryBNAH5k50oHQ5INCkKXa2ne089wlvmHuiNJCvaL-VkZOnE0boJDoHnjSO9iM23B_kL5hlkGZ4MIYPlEJ3x53z9DzLq7d_ks9gcv5IjTRogEbM46Bm8AAzkNbtDx5iQCX2WP7msvz00flRfHXBKWEweU" alt="Youth fellows article" loading="lazy"/>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-meta">
+                  <span class="badge badge-primary" style="font-size:11px;">FELLOWS</span>
+                  <span class="blog-date">May 30, 2024</span>
+                </div>
+                <h3 class="blog-title">Meet Cohort 3: 16 Young Scientists Ready to Change Bangladesh's Nutrition Story</h3>
+                <p class="blog-excerpt">Profiles of the latest Youth Science Fellows cohort — their research focus areas, home districts, and bold ambitions for public health.</p>
+                <a href="#" class="blog-read-link">Read Article <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></a>
+              </div>
+            </article>
+
+            <article class="blog-card fade-up">
+              <div style="overflow:hidden;">
+                <img class="blog-card-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK1VlghXkYqtiwIDotgwrl1umMYbzZy57DvGfhTlB4wa_IMFCyNgMa_1fpzyIwB9jJdzqdM25dffkyjRFM3GKykLjJYL2FYbNWLcRKP8D-jmTZvpc_3zKiveWT4G3pQkF-I4D1FOD0k4KBPvOI_gOAK3Z7GzsMrmE-eoud_Y0U7ddKlJOcY3FQmnyBOYIwgfG8F98ehpJ1v_1MXskUEnWFogFk5HPTqEi5l5w9teb_b220ERcJKA2VakDOVYbLo_O4diaFIZR1Dro" alt="Logistics article" loading="lazy"/>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-meta">
+                  <span class="badge badge-gold" style="font-size:11px;">LOGISTICS</span>
+                  <span class="blog-date">May 12, 2024</span>
+                </div>
+                <h3 class="blog-title">How AI Route Optimisation Cut Our Delivery Time by 40% in Q1 2024</h3>
+                <p class="blog-excerpt">A deep dive into the machine learning models powering Logistics for Life and how we eliminated last-mile delivery failures in 6 months.</p>
+                <a href="#" class="blog-read-link">Read Article <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></a>
+              </div>
+            </article>
+
+            <article class="blog-card fade-up">
+              <div style="overflow:hidden;">
+                <img class="blog-card-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrpS5oQeC-VhASJ14VauLe0x0gGt3Ao8zq9hxq4IVRIz8l4gAW-LZEVVOSflX_uXPaS7jEKmc140yzyNw3lKYZ938j7-UIo43ceJA6Ht_vaJfPpWHYGCfypIS65fHVieCksJBbFKXMvd6DSFMUMBIvJjGxO6eMUJOlwMlHNl06a9Q0fGWvyx_2sJAAkjJdjxZ941w2RSgRAFIY1PSNhszsTUElpXVQeF3YbZpN34TIN1XG0RnODhmo2Lovs1vaeEEA-HbxfYSh70" alt="Data science article" loading="lazy"/>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-meta">
+                  <span class="badge badge-primary" style="font-size:11px;">DATA</span>
+                  <span class="blog-date">April 28, 2024</span>
+                </div>
+                <h3 class="blog-title">Building a Real-Time Nutrition Dashboard: Lessons From the Field</h3>
+                <p class="blog-excerpt">Our data science team explains how they built an offline-first nutrition tracking system that works even in areas with no internet connectivity.</p>
+                <a href="#" class="blog-read-link">Read Article <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></a>
+              </div>
+            </article>
+
+          </div>
+
+          <div style="text-align:center;margin-top:48px;" class="fade-up">
+            <button class="btn btn-secondary" onclick="showToast('More articles loading...')">Load More Articles</button>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+          <!-- Search -->
+          <div class="sidebar-card fade-up">
+            <h4 class="sidebar-title">Search</h4>
+            <div style="position:relative;">
+              <input type="search" class="form-input" placeholder="Search articles..." style="border-radius:var(--radius-lg);padding-right:44px;"/>
+              <span class="material-symbols-outlined" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--on-surface-variant);">search</span>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-card fade-up">
+            <h4 class="sidebar-title">Categories</h4>
+            <div class="category-item"><span>Nutrition Science</span><span class="category-count">12</span></div>
+            <div class="category-item"><span>Field Reports</span><span class="category-count">8</span></div>
+            <div class="category-item"><span>Youth Fellows</span><span class="category-count">6</span></div>
+            <div class="category-item"><span>Technology</span><span class="category-count">5</span></div>
+            <div class="category-item"><span>Research</span><span class="category-count">9</span></div>
+          </div>
+
+          <!-- Popular Posts -->
+          <div class="sidebar-card fade-up">
+            <h4 class="sidebar-title">Popular Posts</h4>
+            <div class="popular-post">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXBt4wXuzj8_GYcXs_EPq-G1eAjLkIwF33oSTRlIxH8JdP_9rLheKa-YvYb-2NdClm6Gt7BPWsdRiCoOui3PNEXyvCAtSvVDqD6OreBZ6gZTSU8JgOWySb5Mc4iH7dzdpmEiQG2urQ7rrjzF8N6nkkzWaVpzNjdP3rsHtUwnF-KMByS659V-BKdotnstyBJrzY8rQX3OeDllL5arZoLlD39KIn-_bEg_GkW6gRO-78n2JYTlceEkhJS6kEdnxSSka8HdLW-ITgq4s" alt=""/>
+              <div>
+                <p class="popular-post-title">5 Micronutrients Every Child in South Asia Needs</p>
+                <p class="popular-post-date">March 15, 2024</p>
+              </div>
+            </div>
+            <div class="popular-post">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmVN7VFUfvJsyRuearQA3GS1THrMUXbJW_4u5rDK7hetU_1_HsofrPCQ3iTUgLUw_G95UMQ0HvymIUCNmdmGSgpWUXPIywuI-fzRUwP0jj_HsTDVmOC3ryBNAH5k50oHQ5INCkKXa2ne089wlvmHuiNJCvaL-VkZOnE0boJDoHnjSO9iM23B_kL5hlkGZ4MIYPlEJ3x53z9DzLq7d_ks9gcv5IjTRogEbM46Bm8AAzkNbtDx5iQCX2WP7msvz00flRfHXBKWEweU" alt=""/>
+              <div>
+                <p class="popular-post-title">The Bagerhat Model: A Replicable Framework</p>
+                <p class="popular-post-date">Feb 8, 2024</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="sidebar-card fade-up" style="background:var(--primary);">
+            <h4 style="color:white;font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:12px;">Get Monthly Updates</h4>
+            <p style="font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:20px;line-height:1.5;">Science-packed impact reports straight to your inbox.</p>
+            <form class="newsletter-form" style="flex-direction:column;max-width:100%;" action="#">
+              <input type="email" class="form-input" placeholder="Your email" style="border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:white;" required/>
+              <button type="submit" class="btn" style="background:var(--nova-gold);color:var(--on-primary-fixed);margin-top:10px;justify-content:center;">Subscribe</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f" opacity="0.6"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+          <span class="footer-brand-name">NOVA Nourish</span>
+        </div>
+        <p class="footer-tagline">Empowering global nutrition through science and youth-led innovation.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Explore</h4>
+        <nav class="footer-links"><a href="programs.html">Programs</a><a href="about.html">About</a><a href="gallery.html">Gallery</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Connect</h4>
+        <nav class="footer-links"><a href="volunteer.html">Volunteer</a><a href="blog.html">Blog</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Support</h4>
+        <a href="donate.html" class="btn btn-primary w-full" style="justify-content:center;">Donate Now</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 NOVA Nourish Foundation.</p></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/yournumber" class="fab-whatsapp" aria-label="Chat on WhatsApp"><span class="material-symbols-outlined">chat</span></a>
+
+<script src="js/main.js"></script>
+</body>
+</html>

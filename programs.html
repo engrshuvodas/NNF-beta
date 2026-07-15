@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Programs | NOVA Nourish Foundation</title>
+  <meta name="description" content="Explore NOVA Nourish Foundation's flagship programs including Bio-Fortification Labs, Youth Science Fellows, and Logistics for Life."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .program-hero {
+      padding: 140px 0 80px;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-container-low) 100%);
+      text-align: center;
+    }
+
+    .programs-filter {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 500;
+      border: 2px solid var(--outline-variant);
+      color: var(--on-surface-variant);
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(0,107,47,0.05);
+    }
+
+    .program-full-card {
+      background: var(--surface-base);
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--outline-variant);
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-bottom: var(--gutter);
+    }
+
+    @media (min-width: 768px) {
+      .program-full-card {
+        grid-template-columns: 1fr 1fr;
+      }
+      .program-full-card:nth-child(even) .prog-img-wrap {
+        order: 2;
+      }
+    }
+
+    .prog-img-wrap {
+      height: 300px;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .prog-img-wrap { height: auto; }
+    }
+
+    .prog-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .program-full-card:hover .prog-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .prog-content {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .prog-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .prog-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .prog-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .prog-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .prog-stat-item {
+      text-align: center;
+    }
+
+    .prog-stat-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .prog-stat-lbl {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      font-weight: 500;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .feature-list li .material-symbols-outlined {
+      font-size: 18px;
+      color: var(--fresh-leaf);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+      <span class="nav-logo-text">NOVA Nourish</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="volunteer.html" class="nav-link">Volunteer</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-lang">EN / BN</button>
+      <a href="donate.html" class="btn btn-gold btn-sm">Donate Now</a>
+      <button class="nav-hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="volunteer.html">Volunteer</a>
+    <a href="donate.html">Donate Now →</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="program-hero">
+    <div class="container">
+      <div class="fade-up">
+        <span class="badge badge-primary" style="margin-bottom:20px;">What We Do</span>
+        <h1 class="headline-xl" style="color:var(--text-primary);margin-bottom:16px;max-width:600px;margin-inline:auto;">Our Programs</h1>
+        <p class="body-lg" style="color:var(--text-secondary);max-width:560px;margin-inline:auto;">
+          Science-driven, community-tested interventions designed to eliminate malnutrition at scale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="section-py" style="background:var(--surface-base);">
+    <div class="container">
+
+      <div class="programs-filter fade-up">
+        <button class="filter-btn active" data-filter="all">All Programs</button>
+        <button class="filter-btn" data-filter="nutrition">Nutrition</button>
+        <button class="filter-btn" data-filter="education">Education</button>
+        <button class="filter-btn" data-filter="impact">Impact</button>
+      </div>
+
+      <!-- Program 1 -->
+      <div class="program-full-card fade-up" data-category="nutrition">
+        <div class="prog-img-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXBt4wXuzj8_GYcXs_EPq-G1eAjLkIwF33oSTRlIxH8JdP_9rLheKa-YvYb-2NdClm6Gt7BPWsdRiCoOui3PNEXyvCAtSvVDqD6OreBZ6gZTSU8JgOWySb5Mc4iH7dzdpmEiQG2urQ7rrjzF8N6nkkzWaVpzNjdP3rsHtUwnF-KMByS659V-BKdotnstyBJrzY8rQX3OeDllL5arZoLlD39KIn-_bEg_GkW6gRO-78n2JYTlceEkhJS6kEdnxSSka8HdLW-ITgq4s" alt="Bio-Fortification Labs"/>
+        </div>
+        <div class="prog-content">
+          <div class="prog-meta">
+            <span class="badge badge-green">NUTRITION</span>
+            <span style="font-size:12px;color:var(--on-surface-variant);">Since 2022</span>
+          </div>
+          <h2 class="prog-title">Bio-Fortification Labs</h2>
+          <p class="prog-desc">
+            Our Bio-Fortification Labs deploy cutting-edge micronutrient science to enhance local crop yields. By fortifying staple crops like rice and lentils with iron, zinc, and vitamin A, we tackle hidden hunger where it lives — in everyday meals.
+          </p>
+          <div class="prog-stats">
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">12+</span>
+              <span class="prog-stat-lbl">Crop Varieties</span>
+            </div>
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">500</span>
+              <span class="prog-stat-lbl">Farmers Trained</span>
+            </div>
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">3</span>
+              <span class="prog-stat-lbl">Districts Active</span>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li><span class="material-symbols-outlined">check_circle</span> Peer-reviewed fortification protocols</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Farmer training &amp; soil testing kits</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Quarterly yield impact assessments</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="volunteer.html" class="btn btn-primary btn-sm">Get Involved</a>
+            <a href="donate.html" class="btn btn-secondary btn-sm">Fund This Program</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 2 -->
+      <div class="program-full-card fade-up" data-category="education">
+        <div class="prog-img-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmVN7VFUfvJsyRuearQA3GS1THrMUXbJW_4u5rDK7hetU_1_HsofrPCQ3iTUgLUw_G95UMQ0HvymIUCNmdmGSgpWUXPIywuI-fzRUwP0jj_HsTDVmOC3ryBNAH5k50oHQ5INCkKXa2ne089wlvmHuiNJCvaL-VkZOnE0boJDoHnjSO9iM23B_kL5hlkGZ4MIYPlEJ3x53z9DzLq7d_ks9gcv5IjTRogEbM46Bm8AAzkNbtDx5iQCX2WP7msvz00flRfHXBKWEweU" alt="Youth Science Fellows"/>
+        </div>
+        <div class="prog-content">
+          <div class="prog-meta">
+            <span class="badge badge-primary">EDUCATION</span>
+            <span style="font-size:12px;color:var(--on-surface-variant);">Since 2022</span>
+          </div>
+          <h2 class="prog-title">Youth Science Fellows</h2>
+          <p class="prog-desc">
+            A six-month intensive fellowship that embeds young Bangladeshi scientists directly into our field operations. Fellows conduct original research, co-author impact reports, and graduate as certified public health advocates.
+          </p>
+          <div class="prog-stats">
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">48</span>
+              <span class="prog-stat-lbl">Fellows Trained</span>
+            </div>
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">6</span>
+              <span class="prog-stat-lbl">Months Duration</span>
+            </div>
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">92%</span>
+              <span class="prog-stat-lbl">Completion Rate</span>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li><span class="material-symbols-outlined">check_circle</span> Monthly stipend &amp; research funding</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Mentorship from GAIN &amp; WHO advisors</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Publication support &amp; career pathway</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="volunteer.html" class="btn btn-primary btn-sm">Apply as Fellow</a>
+            <a href="donate.html" class="btn btn-secondary btn-sm">Sponsor a Fellow</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 3 -->
+      <div class="program-full-card fade-up" data-category="impact">
+        <div class="prog-img-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK1VlghXkYqtiwIDotgwrl1umMYbzZy57DvGfhTlB4wa_IMFCyNgMa_1fpzyIwB9jJdzqdM25dffkyjRFM3GKykLjJYL2FYbNWLcRKP8D-jmTZvpc_3zKiveWT4G3pQkF-I4D1FOD0k4KBPvOI_gOAK3Z7GzsMrmE-eoud_Y0U7ddKlJOcY3FQmnyBOYIwgfG8F98ehpJ1v_1MXskUEnWFogFk5HPTqEi5l5w9teb_b220ERcJKA2VakDOVYbLo_O4diaFIZR1Dro" alt="Logistics for Life"/>
+        </div>
+        <div class="prog-content">
+          <div class="prog-meta">
+            <span class="badge badge-gold">IMPACT</span>
+            <span style="font-size:12px;color:var(--on-surface-variant);">Since 2023</span>
+          </div>
+          <h2 class="prog-title">Logistics for Life</h2>
+          <p class="prog-desc">
+            Using proprietary route-optimisation algorithms, our Logistics for Life program ensures that fortified supplements and nutrition kits reach the most remote households with zero cold-chain breaks and maximum efficiency.
+          </p>
+          <div class="prog-stats">
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">12.4k</span>
+              <span class="prog-stat-lbl">Meals Delivered</span>
+            </div>
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">98%</span>
+              <span class="prog-stat-lbl">On-Time Rate</span>
+            </div>
+            <div class="prog-stat-item">
+              <span class="prog-stat-num">0</span>
+              <span class="prog-stat-lbl">Spoilage Incidents</span>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li><span class="material-symbols-outlined">check_circle</span> GPS-tracked electric delivery vehicles</li>
+            <li><span class="material-symbols-outlined">check_circle</span> AI-powered demand forecasting</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Real-time beneficiary confirmation</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="volunteer.html" class="btn btn-primary btn-sm">Volunteer as Driver</a>
+            <a href="donate.html" class="btn btn-secondary btn-sm">Fund a Delivery Run</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-py" style="background:var(--surface-container);text-align:center;">
+    <div class="container">
+      <h2 class="headline-xl fade-up" style="margin-bottom:16px;">Want to Collaborate?</h2>
+      <p class="body-lg fade-up" style="color:var(--text-secondary);margin-bottom:36px;max-width:500px;margin-inline:auto;">Organisations, universities, and governments — we welcome strategic partnerships that accelerate our mission.</p>
+      <a href="volunteer.html#contact" class="btn btn-primary fade-up">Get in Touch</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f" opacity="0.6"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+          <span class="footer-brand-name">NOVA Nourish</span>
+        </div>
+        <p class="footer-tagline">Empowering global nutrition through science and youth-led innovation.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Explore</h4>
+        <nav class="footer-links"><a href="programs.html">Programs</a><a href="about.html">About</a><a href="gallery.html">Gallery</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Connect</h4>
+        <nav class="footer-links"><a href="volunteer.html">Volunteer</a><a href="blog.html">Blog</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Support</h4>
+        <a href="donate.html" class="btn btn-primary w-full" style="justify-content:center;">Donate Now</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 NOVA Nourish Foundation.</p></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/yournumber" class="fab-whatsapp" aria-label="Chat on WhatsApp"><span class="material-symbols-outlined">chat</span></a>
+
+<script src="js/main.js"></script>
+<script>
+  // Filter programs
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const programCards = document.querySelectorAll('.program-full-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      programCards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'grid';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

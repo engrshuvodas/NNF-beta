@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOVA Nourish Foundation | Science • Nutrition • Innovation • Impact</title>
+  <meta name="description" content="NOVA Nourish Foundation empowers global health through youth-led nutrition science, bio-fortification research, and community-driven impact programs in Bangladesh and beyond."/>
+  <meta property="og:title" content="NOVA Nourish Foundation"/>
+  <meta property="og:description" content="Empowering Global Health through Youth-Led Nutrition Science."/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/home.css"/>
+
+  <style>
+    /* Inline page overrides */
+    .hero { min-height: calc(100vh - 80px); }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" role="navigation" aria-label="Main Navigation">
+  <div class="nav-inner">
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo" aria-label="NOVA Nourish Home">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+        <rect width="44" height="44" rx="12" fill="#006b2f"/>
+        <path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="22" cy="22" r="3" fill="#f5b335"/>
+      </svg>
+      <span class="nav-logo-text">NOVA Nourish</span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="nav-links" role="menubar">
+      <a href="index.html" class="nav-link" role="menuitem">Home</a>
+      <a href="about.html" class="nav-link" role="menuitem">About</a>
+      <a href="programs.html" class="nav-link" role="menuitem">Programs</a>
+      <a href="gallery.html" class="nav-link" role="menuitem">Gallery</a>
+      <a href="blog.html" class="nav-link" role="menuitem">Blog</a>
+      <a href="volunteer.html" class="nav-link" role="menuitem">Volunteer</a>
+    </div>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <button class="btn-lang" aria-label="Language toggle">EN / BN</button>
+      <a href="donate.html" class="btn btn-gold btn-sm" data-donate aria-label="Donate Now">Donate Now</a>
+      <button class="nav-hamburger" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile-menu" id="mobileMenu" role="menu">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="volunteer.html">Volunteer</a>
+    <a href="donate.html" class="nav-link">Donate Now →</a>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero hero-section" id="hero" aria-label="Hero">
+    <div class="hero-bg">
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBTXYB3PmVVsA65EpH0yu2wD2PVcxxS2-tlyewOhMVkp5DdInSo5f9weD9unJsKwY8KBBNVjA_dnQlNUIyz3Yk8U1nmPmdtJmdy0PYwAOcxdt8chG1kPO8Q1nWOdSLEd5hv7HKhZppSFyx9cgdrdQtNBrjgmQyXGfH_pHsq3jmKLDMdcm7dE0BRoehCAABHiq76QTZILO1c1kc7PM6K-hoFXTjfvEhBGjqoZkvxMwD9HAFRDnZTNfobTZFQXz-p9TZYun3v_5oNPI"
+        alt="Youth volunteers teaching nutrition science to local families in Bangladesh"
+        loading="eager"
+      />
+    </div>
+    <div class="hero-content">
+      <div class="hero-inner fade-up">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          Science &bull; Nutrition &bull; Innovation
+        </div>
+        <h1 class="display-lg">
+          Empowering Global Health through
+          <span class="accent"> Youth-Led</span>
+          Nutrition Science.
+        </h1>
+        <div class="hero-btns">
+          <a href="donate.html" class="btn btn-primary btn-lg" data-donate>
+            Donate to Impact
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </a>
+          <a href="about.html" class="btn btn-secondary btn-lg">Our Mission</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IMPACT STATS ===== -->
+  <section class="section-py bg-muted" aria-label="Impact Statistics">
+    <div class="container">
+      <div class="grid-4">
+        <div class="stat-card fade-up">
+          <span class="stat-number" data-counter="25" data-suffix="+">25+</span>
+          <p class="stat-label">Families Lifted</p>
+        </div>
+        <div class="stat-card fade-up">
+          <span class="stat-number" data-counter="80" data-suffix="+">80+</span>
+          <p class="stat-label">Local Leaders Trained</p>
+        </div>
+        <div class="stat-card fade-up">
+          <span class="stat-number" data-counter="8" data-suffix="+">8+</span>
+          <p class="stat-label">Partner Organisations</p>
+        </div>
+        <div class="stat-card fade-up">
+          <span class="stat-number" data-counter="100" data-suffix="%">100%</span>
+          <p class="stat-label">Transparency</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRANSPARENCY REPORT ===== -->
+  <section class="section-py transparency-section" aria-label="Transparency Report">
+    <div class="container">
+      <div class="transparency-content">
+        <!-- Text & Progress -->
+        <div>
+          <h2 class="headline-xl mb-md fade-up" style="color:var(--text-primary)">Transparency Report</h2>
+          <p class="body-lg fade-up" style="color:var(--text-secondary); margin-bottom:40px; max-width:520px">
+            We operate with surgical precision and radical honesty. Every dollar donated to NOVA Nourish Foundation is tracked and optimised for maximum community impact.
+          </p>
+
+          <div class="progress-item fade-up">
+            <div class="progress-label-row">
+              <span class="progress-name">Nutrition Distribution</span>
+              <span class="progress-pct">85%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" data-width="85%" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item fade-up">
+            <div class="progress-label-row">
+              <span class="progress-name">Health Education</span>
+              <span class="progress-pct">10%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" data-width="10%" style="width:0%; background:rgba(93,187,70,0.55)"></div>
+            </div>
+          </div>
+
+          <div class="progress-item fade-up">
+            <div class="progress-label-row">
+              <span class="progress-name">Research & Innovation</span>
+              <span class="progress-pct">5%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" data-width="5%" style="width:0%; background:rgba(93,187,70,0.35)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Preview -->
+        <div class="fade-up">
+          <div class="video-preview">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrpS5oQeC-VhASJ14VauLe0x0gGt3Ao8zq9hxq4IVRIz8l4gAW-LZEVVOSflX_uXPaS7jEKmc140yzyNw3lKYZ938j7-UIo43ceJA6Ht_vaJfPpWHYGCfypIS65fHVieCksJBbFKXMvd6DSFMUMBIvJjGxO6eMUJOlwMlHNl06a9Q0fGWvyx_2sJAAkjJdjxZ941w2RSgRAFIY1PSNhszsTUElpXVQeF3YbZpN34TIN1XG0RnODhmo2Lovs1vaeEEA-HbxfYSh70"
+              alt="3D data visualization showing global nutrition impact metrics"
+              loading="lazy"
+            />
+            <div class="video-overlay" role="button" aria-label="Play impact video" tabindex="0">
+              <div class="play-btn">
+                <span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FLAGSHIP PROGRAMS ===== -->
+  <section class="section-py programs-section" id="programs" aria-label="Flagship Programs">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="headline-xl">Our Flagship Programs</h2>
+        <p class="body-lg">Scalable solutions rooted in scientific research and community empowerment.</p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Card 1 -->
+        <article class="card fade-up" style="display:flex;flex-direction:column;">
+          <div class="card-img-wrap">
+            <img
+              class="card-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXBt4wXuzj8_GYcXs_EPq-G1eAjLkIwF33oSTRlIxH8JdP_9rLheKa-YvYb-2NdClm6Gt7BPWsdRiCoOui3PNEXyvCAtSvVDqD6OreBZ6gZTSU8JgOWySb5Mc4iH7dzdpmEiQG2urQ7rrjzF8N6nkkzWaVpzNjdP3rsHtUwnF-KMByS659V-BKdotnstyBJrzY8rQX3OeDllL5arZoLlD39KIn-_bEg_GkW6gRO-78n2JYTlceEkhJS6kEdnxSSka8HdLW-ITgq4s"
+              alt="Fortified nutritional supplements being packaged in a clean, scientific facility"
+              loading="lazy"
+            />
+            <span class="badge badge-green" style="position:absolute;top:16px;left:16px;">NUTRITION</span>
+          </div>
+          <div class="card-body" style="flex:1;">
+            <h3 class="headline-md" style="margin-bottom:12px;">Bio-Fortification Labs</h3>
+            <p class="body-md" style="color:var(--text-secondary);flex:1;margin-bottom:24px;">
+              Deploying advanced micronutrient technology to enhance local crop yields and tackle hidden hunger.
+            </p>
+            <a href="programs.html" class="flex items-center gap-sm" style="color:var(--primary);font-weight:600;font-size:14px;transition:gap 0.2s;">
+              Learn More <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card fade-up" style="display:flex;flex-direction:column;">
+          <div class="card-img-wrap">
+            <img
+              class="card-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmVN7VFUfvJsyRuearQA3GS1THrMUXbJW_4u5rDK7hetU_1_HsofrPCQ3iTUgLUw_G95UMQ0HvymIUCNmdmGSgpWUXPIywuI-fzRUwP0jj_HsTDVmOC3ryBNAH5k50oHQ5INCkKXa2ne089wlvmHuiNJCvaL-VkZOnE0boJDoHnjSO9iM23B_kL5hlkGZ4MIYPlEJ3x53z9DzLq7d_ks9gcv5IjTRogEbM46Bm8AAzkNbtDx5iQCX2WP7msvz00flRfHXBKWEweU"
+              alt="Young scientists and community leaders discussing nutrition data in a rural health clinic"
+              loading="lazy"
+            />
+            <span class="badge badge-green" style="position:absolute;top:16px;left:16px;">EDUCATION</span>
+          </div>
+          <div class="card-body" style="flex:1;">
+            <h3 class="headline-md" style="margin-bottom:12px;">Youth Science Fellows</h3>
+            <p class="body-md" style="color:var(--text-secondary);flex:1;margin-bottom:24px;">
+              Training the next generation of public health leaders through intensive field-research fellowships.
+            </p>
+            <a href="programs.html" class="flex items-center gap-sm" style="color:var(--primary);font-weight:600;font-size:14px;transition:gap 0.2s;">
+              Learn More <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card fade-up" style="display:flex;flex-direction:column;">
+          <div class="card-img-wrap">
+            <img
+              class="card-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK1VlghXkYqtiwIDotgwrl1umMYbzZy57DvGfhTlB4wa_IMFCyNgMa_1fpzyIwB9jJdzqdM25dffkyjRFM3GKykLjJYL2FYbNWLcRKP8D-jmTZvpc_3zKiveWT4G3pQkF-I4D1FOD0k4KBPvOI_gOAK3Z7GzsMrmE-eoud_Y0U7ddKlJOcY3FQmnyBOYIwgfG8F98ehpJ1v_1MXskUEnWFogFk5HPTqEi5l5w9teb_b220ERcJKA2VakDOVYbLo_O4diaFIZR1Dro"
+              alt="Nutrition supply distribution centre with electric delivery vehicles"
+              loading="lazy"
+            />
+            <span class="badge badge-green" style="position:absolute;top:16px;left:16px;">IMPACT</span>
+          </div>
+          <div class="card-body" style="flex:1;">
+            <h3 class="headline-md" style="margin-bottom:12px;">Logistics for Life</h3>
+            <p class="body-md" style="color:var(--text-secondary);flex:1;margin-bottom:24px;">
+              Optimising the supply chain of critical nutrition to remote areas using proprietary data modelling.
+            </p>
+            <a href="programs.html" class="flex items-center gap-sm" style="color:var(--primary);font-weight:600;font-size:14px;transition:gap 0.2s;">
+              Learn More <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align:center;margin-top:48px;">
+        <a href="programs.html" class="btn btn-secondary">View All Programs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IMPACT HUB MAP ===== -->
+  <section class="section-py" style="background:var(--surface-base);" aria-label="Impact Hub">
+    <div class="container">
+      <div class="impact-map-card fade-up">
+        <!-- Info Panel -->
+        <div class="impact-map-info">
+          <div class="impact-map-eyebrow">
+            <span class="material-symbols-outlined" style="font-size:16px;" aria-hidden="true">public</span>
+            Global Dashboard
+          </div>
+          <h2 class="impact-map-title">Impact Hub:<br/>Bagerhat</h2>
+          <p class="impact-map-desc">
+            Our primary innovation site in Bangladesh serves as the blueprint for youth-led nutritional intervention across the Global South.
+          </p>
+          <div class="impact-feature">
+            <div class="impact-feature-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">monitoring</span>
+            </div>
+            <div>
+              <p class="impact-feature-title">Real-time Data</p>
+              <p class="impact-feature-desc">Live field reports tracking meal impact across communities.</p>
+            </div>
+          </div>
+          <div class="impact-feature">
+            <div class="impact-feature-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">psychology</span>
+            </div>
+            <div>
+              <p class="impact-feature-title">Innovation Focus</p>
+              <p class="impact-feature-desc">Local leader training modules driving systemic change.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Visual -->
+        <div class="impact-map-visual">
+          <div class="map-bg" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxzsqzF_DIHdp_VWdvyMIVjUqG60GajgU_stWAIOoXpTNrarECflhEwpxwRFpGr2Kq2CulIi7rTLFRnDSaee76exoOHMpJpLabC1iK3uuF7JpOCCzqlwRPggHbCvhp19_TiD3MO67_vue2jydFqJpal7FJcLmm6OFRs1V4mtqJcMzy5ULZo1tysZMKIABPP8TbQSux2ewZazutrTQNYMF5XhEk2reCfc2m0MoZPBdZixJ9PJGWAslrxHEtfIB9SXHRpVcq0j6o71s');" aria-hidden="true"></div>
+          <div class="map-overlays">
+            <div class="map-top">
+              <div class="map-chip">
+                <p class="map-chip-label">Current Site</p>
+                <p class="map-chip-value">Bagerhat District, BD</p>
+              </div>
+              <div class="live-badge">
+                <span class="live-dot" aria-hidden="true"></span>
+                Live Updates
+              </div>
+            </div>
+            <div class="map-stats">
+              <div class="map-stat">
+                <p class="map-stat-label">Active Volunteers</p>
+                <p class="map-stat-value">82</p>
+              </div>
+              <div class="map-stat">
+                <p class="map-stat-label">Meals Dispatched</p>
+                <p class="map-stat-value">12.4k</p>
+              </div>
+              <div class="map-stat" style="display:none;" id="mapStatHidden">
+                <p class="map-stat-label">Health Index Improvement</p>
+                <p class="map-stat-value">+18%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTNERS ===== -->
+  <div class="partners-strip" aria-label="Our Partners">
+    <p class="partners-label">Supported & Recognised By</p>
+    <div class="partners-logos container">
+      <span class="partner-logo">GAIN</span>
+      <span class="partner-logo">SUN Youth Network</span>
+      <span class="partner-logo">WHO Bangladesh</span>
+      <span class="partner-logo">UNICEF</span>
+      <span class="partner-logo">Dhaka University</span>
+    </div>
+  </div>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="section-py newsletter-section" aria-label="Newsletter Subscription">
+    <div class="container">
+      <div class="newsletter-card fade-up">
+        <h2 class="headline-xl">Stay Informed on Our Scientific Progress</h2>
+        <p class="body-lg">Join our network of science-driven philanthropists and volunteers. Get monthly impact reports delivered to your inbox.</p>
+        <form class="newsletter-form" action="#" aria-label="Newsletter signup">
+          <input
+            type="email"
+            class="form-input"
+            placeholder="Enter your email address"
+            aria-label="Email address"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div>
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <rect width="44" height="44" rx="12" fill="#006b2f" opacity="0.6"/>
+            <path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="22" r="3" fill="#f5b335"/>
+          </svg>
+          <span class="footer-brand-name">NOVA Nourish</span>
+        </div>
+        <p class="footer-tagline">Empowering global nutrition through science and youth-led innovation.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-btn" aria-label="Facebook">
+            <span class="material-symbols-outlined" style="font-size:18px;" aria-hidden="true">public</span>
+          </a>
+          <a href="#" class="footer-social-btn" aria-label="Twitter">
+            <span class="material-symbols-outlined" style="font-size:18px;" aria-hidden="true">groups</span>
+          </a>
+          <a href="#" class="footer-social-btn" aria-label="Science Network">
+            <span class="material-symbols-outlined" style="font-size:18px;" aria-hidden="true">science</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="footer-col-title">Explore</h4>
+        <nav class="footer-links" aria-label="Explore navigation">
+          <a href="programs.html">Programs</a>
+          <a href="about.html">Our Science</a>
+          <a href="about.html#transparency">Transparency</a>
+          <a href="gallery.html">Gallery</a>
+        </nav>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <h4 class="footer-col-title">Connect</h4>
+        <nav class="footer-links" aria-label="Connect navigation">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="volunteer.html#contact">Contact Us</a>
+          <a href="blog.html">Blog</a>
+          <a href="https://wa.me/yournumber">WhatsApp</a>
+        </nav>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <h4 class="footer-col-title">Support Our Mission</h4>
+        <p style="font-size:14px;color:var(--surface-variant);margin-bottom:20px;line-height:1.6;">
+          Your contribution fuels scientific nutritional research in marginalised communities.
+        </p>
+        <a href="donate.html" class="btn btn-primary w-full" style="justify-content:center;" data-donate>Donate Now</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 NOVA Nourish Foundation. Supported by GAIN &amp; SUN Youth Network.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/yournumber" class="fab-whatsapp" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+  <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+</a>
+
+<!-- Scripts -->
+<script src="js/main.js"></script>
+<script>
+  // Show 3rd map stat on wider screens
+  const mapStatHidden = document.getElementById('mapStatHidden');
+  if (mapStatHidden && window.innerWidth >= 640) {
+    mapStatHidden.style.display = 'block';
+  }
+</script>
+</body>
+</html>

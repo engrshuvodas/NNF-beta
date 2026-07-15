@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support Our Mission | Donate to NOVA Nourish Foundation</title>
+  <meta name="description" content="Support NOVA Nourish Foundation's mission to eliminate malnutrition. Every donation funds life-changing nutrition science in Bangladesh."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .donate-hero {
+      padding: 120px 0 80px;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-container-low) 100%);
+      text-align: center;
+    }
+
+    .donate-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    @media (min-width: 1024px) {
+      .donate-layout { grid-template-columns: 3fr 2fr; }
+    }
+
+    /* Amount Selector */
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 480px) {
+      .amount-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .amount-btn {
+      padding: 18px 12px;
+      border-radius: var(--radius-xl);
+      border: 2px solid var(--outline-variant);
+      background: var(--surface-base);
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-align: center;
+    }
+
+    .amount-btn span {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      margin-top: 4px;
+    }
+
+    .amount-btn.active, .amount-btn:hover {
+      border-color: var(--primary);
+      background: rgba(0,107,47,0.05);
+      color: var(--primary);
+    }
+
+    .amount-btn.active span { color: var(--primary); }
+
+    .custom-amount {
+      display: flex;
+      align-items: center;
+      border: 2px solid var(--outline-variant);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--surface-base);
+      transition: border-color var(--transition-base);
+    }
+
+    .custom-amount:focus-within {
+      border-color: var(--primary);
+    }
+
+    .currency-symbol {
+      padding: 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+
+    .custom-amount input {
+      flex: 1;
+      padding: 16px 0;
+      border: none;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    .custom-amount input:focus { outline: none; }
+
+    /* Frequency */
+    .frequency-toggle {
+      display: flex;
+      background: var(--surface-container-low);
+      border-radius: var(--radius-full);
+      padding: 4px;
+      margin-bottom: 32px;
+    }
+
+    .freq-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .freq-btn.active {
+      background: var(--surface-base);
+      color: var(--primary);
+      font-weight: 600;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* Donation Card */
+    .donation-card {
+      background: var(--surface-base);
+      border-radius: var(--radius-2xl);
+      padding: 40px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Impact Calculator */
+    .impact-bar {
+      height: 8px;
+      background: var(--surface-container);
+      border-radius: var(--radius-full);
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .impact-fill {
+      height: 100%;
+      background: var(--fresh-leaf);
+      border-radius: var(--radius-full);
+      transition: width 0.5s ease;
+    }
+
+    /* Trust Badges */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gutter);
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      padding: 20px;
+      background: var(--surface-container-low);
+      border-radius: var(--radius-xl);
+    }
+
+    .trust-item .material-symbols-outlined {
+      font-size: 32px;
+      color: var(--primary);
+    }
+
+    .trust-item p {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+      <span class="nav-logo-text">NOVA Nourish</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="volunteer.html" class="nav-link">Volunteer</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-lang">EN / BN</button>
+      <a href="donate.html" class="btn btn-gold btn-sm">Donate Now</a>
+      <button class="nav-hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="volunteer.html">Volunteer</a>
+    <a href="donate.html">Donate Now →</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="donate-hero">
+    <div class="container fade-up">
+      <span class="badge badge-gold" style="margin-bottom:20px;">Make a Difference Today</span>
+      <h1 class="headline-xl" style="color:var(--text-primary);margin-bottom:16px;">Support Our Mission</h1>
+      <p class="body-lg" style="color:var(--text-secondary);max-width:520px;margin-inline:auto;">
+        100% of your donation goes directly to nutrition programs. We have zero administrative overhead hidden from donors.
+      </p>
+    </div>
+  </section>
+
+  <!-- DONATION SECTION -->
+  <section class="section-py" style="background:var(--surface-muted);">
+    <div class="container">
+      <div class="donate-layout">
+
+        <!-- Donation Form -->
+        <div>
+          <div class="donation-card fade-up">
+            <h2 class="headline-md" style="margin-bottom:28px;">Choose Your Impact</h2>
+
+            <!-- Frequency Toggle -->
+            <p style="font-size:14px;font-weight:500;color:var(--on-surface-variant);margin-bottom:12px;">Donation Frequency</p>
+            <div class="frequency-toggle">
+              <button class="freq-btn" data-freq="one-time">One-Time</button>
+              <button class="freq-btn active" data-freq="monthly">Monthly</button>
+              <button class="freq-btn" data-freq="annually">Annually</button>
+            </div>
+
+            <!-- Amount Buttons -->
+            <p style="font-size:14px;font-weight:500;color:var(--on-surface-variant);margin-bottom:12px;">Select Amount (USD)</p>
+            <div class="amount-grid" id="amountGrid">
+              <button class="amount-btn" data-amount="10">$10<span>1 meal kit</span></button>
+              <button class="amount-btn" data-amount="25">$25<span>5 meal kits</span></button>
+              <button class="amount-btn active" data-amount="50">$50<span>1 family/month</span></button>
+              <button class="amount-btn" data-amount="100">$100<span>Training materials</span></button>
+              <button class="amount-btn" data-amount="250">$250<span>Sponsor a Fellow</span></button>
+              <button class="amount-btn" data-amount="500">$500<span>Community hub</span></button>
+            </div>
+
+            <!-- Custom Amount -->
+            <div class="custom-amount" style="margin-bottom:32px;">
+              <span class="currency-symbol">$</span>
+              <input type="number" id="customAmount" placeholder="Custom amount" min="1"/>
+            </div>
+
+            <!-- Impact Preview -->
+            <div style="background:var(--surface-container-low);border-radius:var(--radius-xl);padding:20px;margin-bottom:28px;" id="impactPreview">
+              <p style="font-size:13px;font-weight:600;color:var(--on-surface-variant);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;">Your Impact</p>
+              <p style="font-size:18px;font-weight:600;color:var(--text-primary);" id="impactText">
+                Provides nutrition support for <strong style="color:var(--primary);">1 family for 1 month</strong>
+              </p>
+            </div>
+
+            <!-- Personal Info -->
+            <div style="display:grid;gap:16px;margin-bottom:20px;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div>
+                  <label class="form-label" for="donorFirst">First Name</label>
+                  <input type="text" id="donorFirst" class="form-input" placeholder="First name"/>
+                </div>
+                <div>
+                  <label class="form-label" for="donorLast">Last Name</label>
+                  <input type="text" id="donorLast" class="form-input" placeholder="Last name"/>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="donorEmail">Email Address</label>
+                <input type="email" id="donorEmail" class="form-input" placeholder="you@example.com"/>
+              </div>
+              <div>
+                <label class="form-label">Card Number (Demo)</label>
+                <input type="text" class="form-input" placeholder="4242 4242 4242 4242" maxlength="19"/>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div>
+                  <label class="form-label">Expiry</label>
+                  <input type="text" class="form-input" placeholder="MM / YY" maxlength="7"/>
+                </div>
+                <div>
+                  <label class="form-label">CVV</label>
+                  <input type="text" class="form-input" placeholder="•••" maxlength="4"/>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-gold btn-lg w-full" id="donateSubmit" style="justify-content:center;">
+              <span class="material-symbols-outlined">favorite</span>
+              Donate <span id="donateAmountLabel">$50</span> Monthly
+            </button>
+
+            <p style="font-size:12px;text-align:center;color:var(--on-surface-variant);margin-top:16px;">
+              🔒 256-bit SSL secured. Cancel anytime. Tax-deductible in applicable jurisdictions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <!-- Where Money Goes -->
+          <div class="fade-up" style="background:var(--surface-base);border-radius:var(--radius-2xl);padding:32px;box-shadow:var(--shadow-card);margin-bottom:24px;">
+            <h3 class="headline-sm" style="margin-bottom:20px;">Where Your Money Goes</h3>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:14px;">Field Programs</span>
+                <span style="font-size:14px;font-weight:600;color:var(--primary);">85%</span>
+              </div>
+              <div class="impact-bar"><div class="impact-fill" data-width="85%" style="width:0%"></div></div>
+            </div>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:14px;">Research</span>
+                <span style="font-size:14px;font-weight:600;color:var(--primary);">10%</span>
+              </div>
+              <div class="impact-bar"><div class="impact-fill" data-width="10%" style="width:0%;background:rgba(93,187,70,0.6);"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="font-size:14px;">Administration</span>
+                <span style="font-size:14px;font-weight:600;color:var(--primary);">5%</span>
+              </div>
+              <div class="impact-bar"><div class="impact-fill" data-width="5%" style="width:0%;background:rgba(93,187,70,0.35);"></div></div>
+            </div>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="fade-up" style="background:var(--surface-base);border-radius:var(--radius-2xl);padding:28px;box-shadow:var(--shadow-card);margin-bottom:24px;">
+            <h4 style="font-family:var(--font-display);font-size:16px;font-weight:600;margin-bottom:20px;">Why Trust Us?</h4>
+            <div class="trust-grid">
+              <div class="trust-item">
+                <span class="material-symbols-outlined">verified</span>
+                <p>Registered<br/>NGO</p>
+              </div>
+              <div class="trust-item">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <p>Public<br/>Reports</p>
+              </div>
+              <div class="trust-item">
+                <span class="material-symbols-outlined">handshake</span>
+                <p>GAIN<br/>Partner</p>
+              </div>
+              <div class="trust-item">
+                <span class="material-symbols-outlined">lock</span>
+                <p>SSL<br/>Secured</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote -->
+          <div class="fade-up" style="background:var(--primary);border-radius:var(--radius-2xl);padding:32px;">
+            <div style="font-size:40px;color:rgba(255,255,255,0.3);font-family:Georgia;line-height:1;margin-bottom:12px;">"</div>
+            <p style="font-size:16px;color:rgba(255,255,255,0.9);line-height:1.6;margin-bottom:20px;font-style:italic;">
+              Because of NOVA Nourish, my daughter's haemoglobin went from 8.2 to 11.4 g/dL in four months. This program saved her life.
+            </p>
+            <p style="font-size:13px;color:rgba(255,255,255,0.65);font-weight:600;">— Fatema Begum, Bagerhat</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ONE-TIME IMPACT CALCULATOR -->
+  <section class="section-py" style="background:var(--surface-base);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">Calculator</span>
+        <h2 class="headline-xl">See the Difference You Make</h2>
+      </div>
+      <div class="grid-3 fade-up">
+        <div style="padding:32px;background:var(--surface-container-low);border-radius:var(--radius-2xl);text-align:center;">
+          <span class="stat-number" style="color:var(--primary);">$10</span>
+          <p style="font-family:var(--font-display);font-size:18px;font-weight:600;margin:12px 0 8px;">One Meal Kit</p>
+          <p style="font-size:14px;color:var(--text-secondary);">Provides a fortified nutrition kit with iron, zinc, and vitamin A supplements for one week.</p>
+        </div>
+        <div style="padding:32px;background:var(--primary);border-radius:var(--radius-2xl);text-align:center;">
+          <span class="stat-number" style="color:var(--nova-gold);">$50</span>
+          <p style="font-family:var(--font-display);font-size:18px;font-weight:600;margin:12px 0 8px;color:white;">Family for a Month</p>
+          <p style="font-size:14px;color:rgba(255,255,255,0.8);">Covers full nutrition support including supplements, testing, and health tracking for an entire family.</p>
+        </div>
+        <div style="padding:32px;background:var(--surface-container-low);border-radius:var(--radius-2xl);text-align:center;">
+          <span class="stat-number" style="color:var(--primary);">$250</span>
+          <p style="font-family:var(--font-display);font-size:18px;font-weight:600;margin:12px 0 8px;">Sponsor a Fellow</p>
+          <p style="font-size:14px;color:var(--text-secondary);">Funds one month of a Youth Science Fellow's stipend, research materials, and field costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f" opacity="0.6"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+          <span class="footer-brand-name">NOVA Nourish</span>
+        </div>
+        <p class="footer-tagline">Empowering global nutrition through science and youth-led innovation.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Explore</h4>
+        <nav class="footer-links"><a href="programs.html">Programs</a><a href="about.html">About</a><a href="gallery.html">Gallery</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Connect</h4>
+        <nav class="footer-links"><a href="volunteer.html">Volunteer</a><a href="blog.html">Blog</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Support</h4>
+        <a href="donate.html" class="btn btn-primary w-full" style="justify-content:center;">Donate Now</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 NOVA Nourish Foundation.</p></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/yournumber" class="fab-whatsapp" aria-label="Chat on WhatsApp"><span class="material-symbols-outlined">chat</span></a>
+
+<script src="js/main.js"></script>
+<script>
+  // Frequency toggle
+  let currentFreq = 'monthly';
+  document.querySelectorAll('.freq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFreq = btn.dataset.freq;
+      updateDonateLabel();
+    });
+  });
+
+  // Amount selection
+  let currentAmount = 50;
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentAmount = parseInt(btn.dataset.amount);
+      document.getElementById('customAmount').value = '';
+      updateImpact();
+      updateDonateLabel();
+    });
+  });
+
+  document.getElementById('customAmount').addEventListener('input', (e) => {
+    if (e.target.value) {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      currentAmount = parseInt(e.target.value) || 0;
+      updateImpact();
+      updateDonateLabel();
+    }
+  });
+
+  function updateImpact() {
+    const el = document.getElementById('impactText');
+    let msg = '';
+    if (currentAmount >= 500) msg = 'Establishes a <strong style="color:var(--primary);">community nutrition hub</strong> for 3 months';
+    else if (currentAmount >= 250) msg = 'Sponsors a <strong style="color:var(--primary);">Youth Science Fellow</strong> for one month';
+    else if (currentAmount >= 100) msg = 'Provides <strong style="color:var(--primary);">training materials</strong> for 20 local leaders';
+    else if (currentAmount >= 50) msg = 'Nutrition support for <strong style="color:var(--primary);">1 family for 1 month</strong>';
+    else if (currentAmount >= 25) msg = 'Provides <strong style="color:var(--primary);">5 fortified meal kits</strong> for vulnerable families';
+    else msg = 'Provides <strong style="color:var(--primary);">1 fortified meal kit</strong> for a family in need';
+    el.innerHTML = msg;
+  }
+
+  function updateDonateLabel() {
+    const freqLabels = { 'one-time': 'Once', 'monthly': 'Monthly', 'annually': 'Annually' };
+    document.getElementById('donateAmountLabel').textContent = `$${currentAmount}`;
+    const btn = document.getElementById('donateSubmit');
+    btn.innerHTML = `<span class="material-symbols-outlined">favorite</span> Donate $${currentAmount} ${freqLabels[currentFreq]}`;
+  }
+
+  // Donate submit
+  document.getElementById('donateSubmit').addEventListener('click', (e) => {
+    e.preventDefault();
+    showToast('💚 Thank you! Your donation is being processed.');
+  });
+
+  updateDonateLabel();
+</script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join the Movement | Volunteer with NOVA Nourish Foundation</title>
+  <meta name="description" content="Volunteer with NOVA Nourish Foundation and help drive youth-led nutrition science change in Bangladesh. Apply as a Fellow, Field Volunteer, or Remote Supporter."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .volunteer-hero {
+      padding: 120px 0 80px;
+      background: linear-gradient(135deg, var(--inverse-surface) 0%, #1a3326 100%);
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .volunteer-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(93,187,70,0.15) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+    }
+
+    .volunteer-hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,179,53,0.1) 0%, transparent 70%);
+      bottom: -100px;
+      left: -50px;
+    }
+
+    .role-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gutter);
+    }
+
+    @media (min-width: 640px) { .role-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .role-cards { grid-template-columns: repeat(3, 1fr); } }
+
+    .role-card {
+      background: var(--surface-base);
+      border-radius: var(--radius-2xl);
+      padding: 36px 28px;
+      box-shadow: var(--shadow-card);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .role-card:hover, .role-card.selected {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0,107,47,0.08), var(--shadow-soft);
+    }
+
+    .role-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .role-icon .material-symbols-outlined { font-size: 32px; }
+
+    .role-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .role-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .role-perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .role-perks li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--on-surface-variant);
+    }
+
+    .role-perks li .material-symbols-outlined {
+      font-size: 16px;
+      color: var(--fresh-leaf);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--surface-base);
+      border-radius: var(--radius-2xl);
+      padding: 48px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gutter);
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .form-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row .form-group {
+      margin-bottom: 0;
+    }
+
+    /* FAQs */
+    .faq-item {
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+      transition: color var(--transition-base);
+    }
+
+    .faq-question:hover { color: var(--primary); }
+
+    .faq-icon {
+      font-size: 20px;
+      color: var(--primary);
+      transition: transform var(--transition-base);
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+      <span class="nav-logo-text">NOVA Nourish</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="volunteer.html" class="nav-link">Volunteer</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-lang">EN / BN</button>
+      <a href="donate.html" class="btn btn-gold btn-sm">Donate Now</a>
+      <button class="nav-hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="volunteer.html">Volunteer</a>
+    <a href="donate.html">Donate Now →</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="volunteer-hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="fade-up">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.1);border-radius:9999px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--primary-fixed);margin-bottom:24px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--fresh-leaf);display:inline-block;" class="animate-pulse"></span>
+          Now Recruiting
+        </div>
+        <h1 class="display-lg" style="color:white;margin-bottom:20px;">Join the Movement</h1>
+        <p class="body-lg" style="color:rgba(255,255,255,0.75);max-width:560px;margin-inline:auto;margin-bottom:40px;">
+          Be part of the generation that solves global malnutrition through science, compassion, and relentless community action.
+        </p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <a href="#apply" class="btn btn-gold btn-lg">Apply Now</a>
+          <a href="#roles" class="btn" style="background:rgba(255,255,255,0.1);color:white;border:2px solid rgba(255,255,255,0.3);">See Open Roles</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="section-py" id="roles" style="background:var(--surface-muted);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">How You Can Help</span>
+        <h2 class="headline-xl">Open Volunteer Roles</h2>
+        <p class="body-lg">Select the role that fits your skills and passion.</p>
+      </div>
+      <div class="role-cards">
+
+        <div class="role-card fade-up" id="role-fellow">
+          <div class="role-icon" style="background:rgba(0,107,47,0.1);">
+            <span class="material-symbols-outlined" style="color:var(--primary);">school</span>
+          </div>
+          <h3 class="role-title">Science Fellow</h3>
+          <p class="role-desc">Conduct original nutrition research in Bagerhat District over 6 months alongside our expert team.</p>
+          <ul class="role-perks">
+            <li><span class="material-symbols-outlined">check_circle</span> Monthly stipend provided</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Research publication support</li>
+            <li><span class="material-symbols-outlined">check_circle</span> GAIN mentor network access</li>
+          </ul>
+        </div>
+
+        <div class="role-card fade-up" id="role-field">
+          <div class="role-icon" style="background:rgba(93,187,70,0.1);">
+            <span class="material-symbols-outlined" style="color:var(--fresh-leaf);">volunteer_activism</span>
+          </div>
+          <h3 class="role-title">Field Volunteer</h3>
+          <p class="role-desc">Assist with nutrition assessments, distribution drives, and community health education on weekends.</p>
+          <ul class="role-perks">
+            <li><span class="material-symbols-outlined">check_circle</span> Flexible scheduling</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Field training provided</li>
+            <li><span class="material-symbols-outlined">check_circle</span> NOVA Nourish certification</li>
+          </ul>
+        </div>
+
+        <div class="role-card fade-up" id="role-remote">
+          <div class="role-icon" style="background:rgba(245,179,53,0.1);">
+            <span class="material-symbols-outlined" style="color:var(--nova-gold);">laptop</span>
+          </div>
+          <h3 class="role-title">Remote Supporter</h3>
+          <p class="role-desc">Contribute data analysis, content creation, social media, or fundraising from anywhere in the world.</p>
+          <ul class="role-perks">
+            <li><span class="material-symbols-outlined">check_circle</span> 100% remote-friendly</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 4–8 hrs/week commitment</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Global volunteer community</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="section-py" id="apply" style="background:var(--surface-base);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:64px;max-width:1000px;margin:0 auto;" id="applyGrid">
+
+        <div class="fade-up">
+          <h2 class="headline-xl" style="margin-bottom:16px;color:var(--text-primary);">Apply to Volunteer</h2>
+          <p class="body-lg" style="color:var(--text-secondary);margin-bottom:36px;">Fill out the form and our team will get back to you within 48 hours.</p>
+
+          <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:36px;">
+            <div style="display:flex;align-items:center;gap:16px;padding:20px;background:var(--surface-container-low);border-radius:var(--radius-xl);">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:20px;color:white;">description</span>
+              </div>
+              <div>
+                <p style="font-weight:600;font-size:14px;margin-bottom:4px;">Fill the Application</p>
+                <p style="font-size:13px;color:var(--text-secondary);">Takes about 5 minutes</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:20px;background:var(--surface-container-low);border-radius:var(--radius-xl);">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--fresh-leaf);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:20px;color:white;">video_call</span>
+              </div>
+              <div>
+                <p style="font-weight:600;font-size:14px;margin-bottom:4px;">Brief Intro Call</p>
+                <p style="font-size:13px;color:var(--text-secondary);">20-minute video chat</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:20px;background:var(--surface-container-low);border-radius:var(--radius-xl);">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--nova-gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:20px;color:var(--on-primary-fixed);">celebration</span>
+              </div>
+              <div>
+                <p style="font-weight:600;font-size:14px;margin-bottom:4px;">Welcome Aboard!</p>
+                <p style="font-size:13px;color:var(--text-secondary);">Join your team and start making impact</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form fade-up" id="contact">
+          <h3 class="headline-md" style="margin-bottom:28px;">Volunteer Application</h3>
+          <form id="volunteerForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fname">First Name *</label>
+                <input type="text" id="fname" class="form-input" placeholder="Your first name" required/>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lname">Last Name *</label>
+                <input type="text" id="lname" class="form-input" placeholder="Your last name" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address *</label>
+              <input type="email" id="email" class="form-input" placeholder="you@example.com" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+880 xxxxxxxxxx"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="role">Role of Interest *</label>
+              <select id="role" class="form-input form-select" required>
+                <option value="">Select a role...</option>
+                <option value="fellow">Science Fellow</option>
+                <option value="field">Field Volunteer</option>
+                <option value="remote">Remote Supporter</option>
+                <option value="driver">Logistics Driver</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="background">Your Background *</label>
+              <textarea id="background" class="form-input" placeholder="Tell us about your education, skills, and why you want to volunteer..." style="min-height:140px;" required></textarea>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:12px;">
+              <input type="checkbox" id="agree" style="margin-top:4px;width:16px;height:16px;accent-color:var(--primary);" required/>
+              <label for="agree" style="font-size:13px;color:var(--text-secondary);line-height:1.5;">
+                I agree to NOVA Nourish Foundation's <a href="#" style="color:var(--primary);">volunteer terms</a> and understand that application does not guarantee placement.
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary w-full btn-lg" style="justify-content:center;margin-top:8px;">
+              Submit Application
+              <span class="material-symbols-outlined">send</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="section-py" style="background:var(--surface);">
+    <div class="container" style="max-width:740px;">
+      <div class="section-header fade-up">
+        <span class="eyebrow">Questions?</span>
+        <h2 class="headline-xl">Frequently Asked Questions</h2>
+      </div>
+      <div class="fade-up">
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button">
+            Do I need a scientific background to volunteer?
+            <span class="material-symbols-outlined faq-icon">add</span>
+          </div>
+          <div class="faq-answer">No! While Science Fellow roles require relevant academic background, Field Volunteer and Remote Supporter positions are open to anyone with passion, time, and a willingness to learn. We provide full training.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button">
+            Can I volunteer from outside Bangladesh?
+            <span class="material-symbols-outlined faq-icon">add</span>
+          </div>
+          <div class="faq-answer">Absolutely. Our Remote Supporter program is fully international. We have volunteers from Canada, UK, the Netherlands, and Australia contributing to our data science, communications, and fundraising teams.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button">
+            What is the time commitment for Field Volunteers?
+            <span class="material-symbols-outlined faq-icon">add</span>
+          </div>
+          <div class="faq-answer">Typically 1–2 days per month for distribution drives, plus optional weekly meetups. We are flexible with schedules and always work around your availability.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" tabindex="0" role="button">
+            Is there a deadline to apply?
+            <span class="material-symbols-outlined faq-icon">add</span>
+          </div>
+          <div class="faq-answer">We accept applications on a rolling basis for Field Volunteer and Remote Supporter roles. Science Fellow applications open twice a year — in January and July.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#006b2f" opacity="0.6"/><path d="M10 32V12l7.5 13.5L22 18l4.5 7.5L32 12v20" stroke="#5dbb46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#f5b335"/></svg>
+          <span class="footer-brand-name">NOVA Nourish</span>
+        </div>
+        <p class="footer-tagline">Empowering global nutrition through science and youth-led innovation.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Explore</h4>
+        <nav class="footer-links"><a href="programs.html">Programs</a><a href="about.html">About</a><a href="gallery.html">Gallery</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Connect</h4>
+        <nav class="footer-links"><a href="volunteer.html">Volunteer</a><a href="blog.html">Blog</a></nav>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Support</h4>
+        <a href="donate.html" class="btn btn-primary w-full" style="justify-content:center;">Donate Now</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 NOVA Nourish Foundation.</p></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/yournumber" class="fab-whatsapp" aria-label="Chat on WhatsApp"><span class="material-symbols-outlined">chat</span></a>
+
+<script src="js/main.js"></script>
+<script>
+  // Responsive apply grid
+  const applyGrid = document.getElementById('applyGrid');
+  if (window.innerWidth >= 1024) {
+    applyGrid.style.gridTemplateColumns = '1fr 1fr';
+  }
+
+  // Volunteer form submit
+  document.getElementById('volunteerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('🎉 Application submitted! We\'ll contact you within 48 hours.');
+    e.target.reset();
+  });
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+</script>
+</body>
+</html>
