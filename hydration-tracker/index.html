@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hydration Tracker | Daily Pulse by NOVA Nourish</title>
+  <meta name="description" content="Track hydration, calories, meals, and health habits with Daily Pulse — the science-driven wellness app by NOVA Nourish Foundation."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="app.css"/>
+  <style>
+    .hidden { display: none !important; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.45);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .modal {
+      background: white; border-radius: var(--r-xl);
+      padding: 32px; max-width: 440px; width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+      animation: fadeIn 0.25s ease;
+    }
+    .modal-title {
+      font-family: var(--font-display); font-size: 20px; font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .modal-footer { display:flex; gap:12px; justify-content:flex-end; margin-top:24px; }
+
+    /* ── Vitality ring ── */
+    .vitality-ring-wrap {
+      position: relative; width: 160px; height: 160px; margin: 0 auto;
+    }
+    .vitality-ring-wrap svg {
+      transform: rotate(-90deg); width: 100%; height: 100%;
+    }
+    .vitality-ring-label {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .vitality-ring-num {
+      font-family: var(--font-display); font-size: 32px; font-weight: 700;
+      color: var(--primary); line-height: 1;
+    }
+    .vitality-ring-lbl { font-size: 12px; color: var(--on-surface-variant); font-weight: 600; }
+
+    /* ── Stacked layout for cal results ── */
+    .cal-result-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 20px;
+    }
+
+    .result-chip {
+      background: var(--surface-container-low);
+      border-radius: var(--r-md); padding: 16px;
+      text-align: center;
+    }
+    .result-chip-val {
+      font-family: var(--font-display); font-size: 24px; font-weight: 700;
+      color: var(--primary);
+    }
+    .result-chip-lbl {
+      font-size: 12px; color: var(--on-surface-variant); font-weight: 500; margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     SIDEBAR (Desktop)
+     ════════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-logo">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">water_drop</span>
+    </div>
+    <div>
+      <p class="sidebar-brand-name">Hydration Tracker</p>
+      <p class="sidebar-brand-sub">Daily Pulse by NOVA Nourish</p>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item active" data-page="dashboard" href="#">
+      <span class="material-symbols-outlined">dashboard</span>
+      Dashboard
+    </a>
+    <a class="nav-item" data-page="hydration" href="#">
+      <span class="material-symbols-outlined">water_drop</span>
+      Hydration
+    </a>
+    <a class="nav-item" data-page="calories" href="#">
+      <span class="material-symbols-outlined">calculate</span>
+      Calorie Calculator
+    </a>
+    <a class="nav-item" data-page="meal" href="#">
+      <span class="material-symbols-outlined">restaurant_menu</span>
+      Meal Planner
+    </a>
+    <a class="nav-item" data-page="habits" href="#">
+      <span class="material-symbols-outlined">analytics</span>
+      Habit Tracker
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="btn-log-vitals" onclick="openLogModal()">
+      <span class="material-symbols-outlined">add_circle</span>
+      Log Daily Vitals
+    </button>
+    <a class="nav-item" href="../index.html">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Back to Website
+    </a>
+    <a class="nav-item" href="#">
+      <span class="material-symbols-outlined">settings</span>
+      Settings
+    </a>
+  </div>
+</aside>
+
+<!-- ════════════════════════════════════════════════════════
+     MOBILE TOP BAR
+     ════════════════════════════════════════════════════════ -->
+<div class="mobile-topbar">
+  <div class="mobile-brand">
+    <div style="width:32px;height:32px;border-radius:8px;background:var(--primary);display:flex;align-items:center;justify-content:center;">
+      <span class="material-symbols-outlined" style="font-size:18px;color:white;font-variation-settings:'FILL' 1;">water_drop</span>
+    </div>
+    Hydration Tracker
+  </div>
+  <button class="mobile-menu-btn" id="mobile-menu-btn">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════════════════════ -->
+<main class="main-content">
+
+  <!-- ════ PAGE 1: DASHBOARD ════ -->
+  <div class="app-page active" id="page-dashboard">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Good morning! 🌿</h1>
+        <p class="page-subtitle">Your health snapshot for today</p>
+      </div>
+      <div class="date-chip">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="today-label"></span>
+      </div>
+    </div>
+
+    <!-- Stat cards row -->
+    <div class="stat-grid mb-xl">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(0,107,47,0.08);">
+          <span class="material-symbols-outlined text-primary">water_drop</span>
+        </div>
+        <div class="stat-value" id="dash-hydration-ml">850 ml</div>
+        <div class="stat-label">Hydration Today</div>
+        <div class="stat-trend trend-up">
+          <span class="material-symbols-outlined" style="font-size:14px;">trending_up</span>
+          34% of goal
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(245,179,53,0.12);">
+          <span class="material-symbols-outlined" style="color:var(--tertiary);">local_fire_department</span>
+        </div>
+        <div class="stat-value" id="dash-cal" style="font-size:22px;">0 kcal</div>
+        <div class="stat-label">Calories Today</div>
+        <div id="dash-cal-goal" class="stat-trend text-muted">/ 2000 goal</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(93,187,70,0.1);">
+          <span class="material-symbols-outlined" style="color:var(--secondary);">fitness_center</span>
+        </div>
+        <div class="stat-value">4</div>
+        <div class="stat-label">Habits Completed</div>
+        <div class="stat-trend trend-up">
+          <span class="material-symbols-outlined" style="font-size:14px;">trending_up</span>
+          80% streak
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(0,107,47,0.06);">
+          <span class="material-symbols-outlined text-primary">restaurant</span>
+        </div>
+        <div class="stat-value">2/3</div>
+        <div class="stat-label">Meals Tracked</div>
+        <div class="stat-trend text-muted">Dinner pending</div>
+      </div>
+    </div>
+
+    <!-- Main dashboard grid -->
+    <div style="display:grid;grid-template-columns:1fr;gap:16px;" id="dash-main-grid">
+
+      <!-- Vitality Score -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-md">
+          <div>
+            <p class="card-title">Vitality Score</p>
+            <p class="card-subtitle">Powered by your daily metrics</p>
+          </div>
+          <span class="chip chip-green">Great</span>
+        </div>
+        <div class="vitality-ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" cx="60" cy="60" r="52" id="ring-vitality"
+              style="stroke: var(--primary);" stroke-dasharray="326.7" stroke-dashoffset="90.8"/>
+          </svg>
+          <div class="vitality-ring-label">
+            <span class="vitality-ring-num">72</span>
+            <span class="vitality-ring-lbl">/ 100</span>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:13px;color:var(--on-surface-variant);margin-top:16px;">
+          Log more vitals to improve your score today!
+        </p>
+      </div>
+
+      <!-- Hydration Ring -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-lg">
+          <div>
+            <p class="card-title">Hydration</p>
+            <p class="card-subtitle">Daily water intake goal</p>
+          </div>
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52" id="ring-hydration"
+                style="stroke:#006b2f;" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-value" id="dash-hydration-pct">34%</span>
+              <span class="ring-unit">of goal</span>
+            </div>
+          </div>
+        </div>
+        <div class="track mb-xs"><div class="track-fill dash-track" data-pct="34" style="width:0%"></div></div>
+        <div class="flex justify-between text-sm text-muted">
+          <span>850 ml</span>
+          <span>Goal: 2,500 ml</span>
+        </div>
+        <button class="btn btn-outline w-full mt-lg btn-sm" data-page="hydration">
+          Log Water →
+        </button>
+      </div>
+
+      <!-- Calories Ring -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-lg">
+          <div>
+            <p class="card-title">Calories</p>
+            <p class="card-subtitle">Target intake today</p>
+          </div>
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52" id="ring-calories"
+                style="stroke:var(--nova-gold);" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-value" style="font-size:18px;">0%</span>
+              <span class="ring-unit">eaten</span>
+            </div>
+          </div>
+        </div>
+        <div class="track mb-xs"><div class="track-fill dash-track" data-pct="0" style="width:0%;background:var(--nova-gold);"></div></div>
+        <div class="flex justify-between text-sm text-muted">
+          <span>0 kcal eaten</span>
+          <span>Goal: 2,000 kcal</span>
+        </div>
+        <button class="btn btn-outline w-full mt-lg btn-sm" data-page="calories">
+          Set Calorie Goal →
+        </button>
+      </div>
+
+      <!-- Quick Habits Summary -->
+      <div class="card">
+        <p class="card-title mb-md">Today's Habits</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="flex items-center justify-between" style="padding:10px;background:rgba(0,107,47,0.04);border-radius:var(--r-md);">
+            <div class="flex items-center gap-sm">
+              <span class="material-symbols-outlined text-primary">water_drop</span>
+              <span style="font-size:14px;font-weight:500;">Drink Water Goal</span>
+            </div>
+            <span class="chip chip-green">🔥 4-day streak</span>
+          </div>
+          <div class="flex items-center justify-between" style="padding:10px;background:rgba(0,107,47,0.04);border-radius:var(--r-md);">
+            <div class="flex items-center gap-sm">
+              <span class="material-symbols-outlined text-primary">bedtime</span>
+              <span style="font-size:14px;font-weight:500;">8 Hours Sleep</span>
+            </div>
+            <span class="chip chip-green">🔥 6-day streak</span>
+          </div>
+          <div class="flex items-center justify-between" style="padding:10px;background:var(--surface-container-low);border-radius:var(--r-md);">
+            <div class="flex items-center gap-sm">
+              <span class="material-symbols-outlined" style="color:var(--on-surface-variant);">fitness_center</span>
+              <span style="font-size:14px;font-weight:500;">30-min Exercise</span>
+            </div>
+            <span class="chip" style="background:var(--surface-container);color:var(--on-surface-variant);">Pending</span>
+          </div>
+        </div>
+        <button class="btn btn-primary w-full mt-lg btn-sm" data-page="habits">
+          <span class="material-symbols-outlined">analytics</span> View All Habits
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ PAGE 2: HYDRATION TRACKER ════ -->
+  <div class="app-page" id="page-hydration">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Hydration Tracker</h1>
+        <p class="page-subtitle">Optimising cellular function through precise intake.</p>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <div class="date-chip today-label"></div>
+        <button class="btn btn-ghost btn-sm" onclick="resetDay()">
+          <span class="material-symbols-outlined" style="font-size:16px;">refresh</span> Reset
+        </button>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:16px;">
+
+      <!-- Water Visual Column -->
+      <div class="card text-center">
+        <p class="card-title mb-xs">Today's Intake</p>
+        <p class="card-subtitle">Goal: 2,500 ml</p>
+
+        <div class="water-container" style="margin:24px auto;">
+          <div class="water-fill" id="water-fill" style="height:34%;"></div>
+          <div class="water-label" id="water-label">850 ml</div>
+        </div>
+
+        <div style="padding:0 16px;margin-top:20px;">
+          <div class="flex justify-between mb-xs">
+            <span style="font-size:13px;font-weight:600;" id="hydration-pct-label">34%</span>
+            <span style="font-size:13px;color:var(--on-surface-variant);" id="hydration-remaining">1,650 ml remaining</span>
+          </div>
+          <div class="track">
+            <div class="track-fill" id="hydration-track" style="width:34%;"></div>
+          </div>
+        </div>
+
+        <!-- Milestone dots -->
+        <div class="sep"></div>
+        <p style="font-size:13px;font-weight:600;color:var(--on-surface-variant);margin-bottom:12px;text-align:left;">Milestones</p>
+        <div class="milestone-grid">
+          <div class="milestone-item">
+            <div class="milestone-dot" id="milestone-25">
+              <span class="material-symbols-outlined" style="font-size:20px;">water_drop</span>
+            </div>
+            <span>25%</span>
+          </div>
+          <div class="milestone-item">
+            <div class="milestone-dot" id="milestone-50">
+              <span class="material-symbols-outlined" style="font-size:20px;">local_drink</span>
+            </div>
+            <span>50%</span>
+          </div>
+          <div class="milestone-item">
+            <div class="milestone-dot" id="milestone-75">
+              <span class="material-symbols-outlined" style="font-size:20px;">water_full</span>
+            </div>
+            <span>75%</span>
+          </div>
+          <div class="milestone-item">
+            <div class="milestone-dot" id="milestone-100">
+              <span class="material-symbols-outlined" style="font-size:20px;">emoji_events</span>
+            </div>
+            <span>🎯 100%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Add Column -->
+      <div class="card">
+        <p class="card-title mb-xs">Quick Add</p>
+        <p class="card-subtitle">Tap a cup size to log instantly</p>
+
+        <div class="cup-grid">
+          <button class="cup-btn" onclick="addWater(100)">
+            <span class="material-symbols-outlined">coffee</span>
+            100 ml<span style="font-size:10px;color:var(--on-surface-variant);">Sip</span>
+          </button>
+          <button class="cup-btn" onclick="addWater(250)">
+            <span class="material-symbols-outlined">water_full</span>
+            250 ml<span style="font-size:10px;color:var(--on-surface-variant);">Glass</span>
+          </button>
+          <button class="cup-btn" onclick="addWater(500)">
+            <span class="material-symbols-outlined">water_drop</span>
+            500 ml<span style="font-size:10px;color:var(--on-surface-variant);">Bottle</span>
+          </button>
+          <button class="cup-btn" onclick="addWater(750)">
+            <span class="material-symbols-outlined">local_drink</span>
+            750 ml<span style="font-size:10px;color:var(--on-surface-variant);">Large</span>
+          </button>
+        </div>
+
+        <div class="sep"></div>
+
+        <p style="font-size:13px;font-weight:600;margin-bottom:10px;">Custom Amount</p>
+        <div class="flex gap-sm">
+          <input type="number" id="custom-water-input" class="form-input" placeholder="e.g. 330" min="1" max="2000" style="max-width:140px;"/>
+          <span style="align-self:center;font-size:14px;color:var(--on-surface-variant);">ml</span>
+          <button class="btn btn-primary btn-sm" onclick="addCustomWater()">
+            <span class="material-symbols-outlined" style="font-size:16px;">add</span> Add
+          </button>
+        </div>
+
+        <div class="sep"></div>
+
+        <!-- Log -->
+        <p class="card-title mb-md">Intake Log</p>
+        <div id="hydration-log"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ PAGE 3: CALORIE CALCULATOR ════ -->
+  <div class="app-page" id="page-calories">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Calorie Calculator</h1>
+        <p class="page-subtitle">Science-backed daily energy targets using Harris-Benedict.</p>
+      </div>
+      <div class="date-chip today-label"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:16px;">
+
+      <!-- Input form -->
+      <div class="card">
+        <p class="card-title mb-xs">Your Details</p>
+        <p class="card-subtitle">Enter your biometrics for personalised targets.</p>
+
+        <div class="grid-2" style="gap:12px;margin-bottom:12px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" for="cal-weight">Weight (kg)</label>
+            <input type="number" id="cal-weight" class="form-input" placeholder="70" value="70"/>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" for="cal-height">Height (cm)</label>
+            <input type="number" id="cal-height" class="form-input" placeholder="170" value="170"/>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" for="cal-age">Age</label>
+            <input type="number" id="cal-age" class="form-input" placeholder="25" value="25"/>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" for="cal-gender">Gender</label>
+            <select id="cal-gender" class="form-input">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cal-activity">Activity Level</label>
+          <select id="cal-activity" class="form-input">
+            <option value="1.2">Sedentary (desk job, no exercise)</option>
+            <option value="1.375" selected>Lightly Active (1–3 days/week)</option>
+            <option value="1.55">Moderately Active (3–5 days/week)</option>
+            <option value="1.725">Very Active (6–7 days/week)</option>
+            <option value="1.9">Extra Active (athlete / physical work)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cal-goal">Your Goal</label>
+          <select id="cal-goal" class="form-input">
+            <option value="maintain">Maintain Weight</option>
+            <option value="lose">Lose Weight (−500 kcal/day)</option>
+            <option value="gain">Gain Muscle (+500 kcal/day)</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary w-full btn-lg" onclick="calculateCalories()">
+          <span class="material-symbols-outlined">calculate</span>
+          Calculate My Targets
+        </button>
+      </div>
+
+      <!-- Results -->
+      <div class="card hidden" id="cal-results">
+        <p class="card-title mb-xs">Your Personalised Plan</p>
+        <p class="card-subtitle">Based on Harris-Benedict + Mifflin-St Jeor formula</p>
+
+        <div class="cal-result-grid">
+          <div class="result-chip">
+            <div class="result-chip-val" id="result-bmr">—</div>
+            <div class="result-chip-lbl">BMR (kcal/day)</div>
+          </div>
+          <div class="result-chip" style="background:rgba(0,107,47,0.06);">
+            <div class="result-chip-val" id="result-tdee">—</div>
+            <div class="result-chip-lbl">TDEE (maintenance)</div>
+          </div>
+          <div class="result-chip" style="background:var(--primary);grid-column:span 2;">
+            <div class="result-chip-val" id="result-target" style="color:white;font-size:32px;">—</div>
+            <div class="result-chip-lbl" style="color:rgba(255,255,255,0.8);">Daily Target (kcal)</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <p style="font-size:13px;font-weight:600;margin-bottom:16px;">Macronutrient Breakdown</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <div class="flex justify-between mb-xs">
+              <span style="font-size:14px;font-weight:500;">Protein</span>
+              <span style="font-size:14px;font-weight:700;color:var(--primary);" id="result-protein">—</span>
+            </div>
+            <div class="track"><div class="track-fill" id="bar-protein" style="width:0%;background:var(--primary);"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-xs">
+              <span style="font-size:14px;font-weight:500;">Carbohydrates</span>
+              <span style="font-size:14px;font-weight:700;color:var(--tertiary);" id="result-carbs">—</span>
+            </div>
+            <div class="track"><div class="track-fill" id="bar-carbs" style="width:0%;background:var(--tertiary-fixed-dim);"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-xs">
+              <span style="font-size:14px;font-weight:500;">Healthy Fats</span>
+              <span style="font-size:14px;font-weight:700;color:var(--secondary);" id="result-fat">—</span>
+            </div>
+            <div class="track"><div class="track-fill" id="bar-fat" style="width:0%;background:var(--secondary-fixed-dim, #95f779);"></div></div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div style="background:rgba(0,107,47,0.04);border-radius:var(--r-md);padding:16px;">
+          <p style="font-size:13px;color:var(--on-surface-variant);line-height:1.6;">
+            💡 <strong>Note:</strong> These are estimates based on established formulas. Consult a registered dietitian for personalised medical nutrition therapy.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ PAGE 4: MEAL PLANNER ════ -->
+  <div class="app-page" id="page-meal">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Meal Planner</h1>
+        <p class="page-subtitle">Plan your nutritious week, meal by meal.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" onclick="WEEK_DAYS.forEach((d,i) => autoFillDay(i)); showToast('Full week auto-filled! 🎉')">
+          <span class="material-symbols-outlined" style="font-size:16px;">auto_awesome</span> Auto-Fill Week
+        </button>
+        <button class="btn btn-ghost btn-sm" onclick="State.meals.plan={}; renderMealPlanner(); showToast('Week cleared.')">
+          <span class="material-symbols-outlined" style="font-size:16px;">clear_all</span> Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- Nutritional summary chips -->
+    <div class="flex gap-md flex-wrap mb-xl">
+      <div class="card" style="padding:16px 20px;flex:1;min-width:140px;text-align:center;">
+        <p style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--primary);">~1,850</p>
+        <p style="font-size:12px;color:var(--on-surface-variant);">Avg Daily kcal</p>
+      </div>
+      <div class="card" style="padding:16px 20px;flex:1;min-width:140px;text-align:center;">
+        <p style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--tertiary);">~95g</p>
+        <p style="font-size:12px;color:var(--on-surface-variant);">Avg Protein</p>
+      </div>
+      <div class="card" style="padding:16px 20px;flex:1;min-width:140px;text-align:center;">
+        <p style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--secondary);">~230g</p>
+        <p style="font-size:12px;color:var(--on-surface-variant);">Avg Carbs</p>
+      </div>
+    </div>
+
+    <div id="meal-planner-grid" style="display:grid;grid-template-columns:1fr;gap:16px;"></div>
+  </div>
+
+  <!-- ════ PAGE 5: HABIT TRACKER ════ -->
+  <div class="app-page" id="page-habits">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Habit Tracker</h1>
+        <p class="page-subtitle">Build consistent healthy habits, one day at a time.</p>
+      </div>
+      <div class="date-chip today-label"></div>
+    </div>
+
+    <!-- Weekly overview header -->
+    <div class="card mb-xl">
+      <div class="flex items-center justify-between mb-md">
+        <p class="card-title">This Week's Overview</p>
+        <span class="chip chip-green">Week 29, 2024</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;">
+        <div class="day-label">Mon</div>
+        <div class="day-label">Tue</div>
+        <div class="day-label">Wed</div>
+        <div class="day-label">Thu</div>
+        <div class="day-label">Fri</div>
+        <div class="day-label">Sat</div>
+        <div class="day-label">Sun</div>
+        <div class="day-check checked" style="border-radius:6px;"><span class="material-symbols-outlined" style="font-size:14px;">check</span></div>
+        <div class="day-check checked" style="border-radius:6px;"><span class="material-symbols-outlined" style="font-size:14px;">check</span></div>
+        <div class="day-check checked" style="border-radius:6px;"><span class="material-symbols-outlined" style="font-size:14px;">check</span></div>
+        <div class="day-check checked" style="border-radius:6px;"><span class="material-symbols-outlined" style="font-size:14px;">check</span></div>
+        <div class="day-check" style="border-radius:6px;"></div>
+        <div class="day-check" style="border-radius:6px;"></div>
+        <div class="day-check" style="border-radius:6px;"></div>
+      </div>
+      <p style="font-size:13px;color:var(--on-surface-variant);margin-top:12px;">4/7 days completed this week · 57% consistency</p>
+    </div>
+
+    <!-- Add habit -->
+    <div class="card mb-xl">
+      <p class="card-title mb-md">Add New Habit</p>
+      <div class="flex gap-sm">
+        <input type="text" id="new-habit-input" class="form-input" placeholder="E.g. Take vitamins daily" style="flex:1;"/>
+        <button class="btn btn-primary" onclick="addHabit()">
+          <span class="material-symbols-outlined">add</span> Add
+        </button>
+      </div>
+    </div>
+
+    <!-- Habits list -->
+    <div id="habits-list"></div>
+
+  </div>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════════
+     MOBILE BOTTOM NAV
+     ════════════════════════════════════════════════════════ -->
+<div class="mobile-bottom-nav">
+  <div class="nav-items">
+    <a class="mobile-nav-item active" data-page="dashboard" href="#">
+      <span class="material-symbols-outlined">dashboard</span> Home
+    </a>
+    <a class="mobile-nav-item" data-page="hydration" href="#">
+      <span class="material-symbols-outlined">water_drop</span> Water
+    </a>
+    <a class="mobile-nav-item" data-page="calories" href="#">
+      <span class="material-symbols-outlined">calculate</span> Calories
+    </a>
+    <a class="mobile-nav-item" data-page="meal" href="#">
+      <span class="material-symbols-outlined">restaurant_menu</span> Meals
+    </a>
+    <a class="mobile-nav-item" data-page="habits" href="#">
+      <span class="material-symbols-outlined">analytics</span> Habits
+    </a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     LOG VITALS MODAL
+     ════════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="log-modal">
+  <div class="modal">
+    <h3 class="modal-title">Log Daily Vitals</h3>
+
+    <div class="form-group">
+      <label class="form-label" for="log-water">Water Intake (ml)</label>
+      <input type="number" id="log-water" class="form-input" placeholder="e.g. 250"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="log-calories">Calories Consumed (kcal)</label>
+      <input type="number" id="log-calories" class="form-input" placeholder="e.g. 600"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="log-notes">Notes (optional)</label>
+      <input type="text" id="log-notes" class="form-input" placeholder="E.g. Post-workout meal"/>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeLogModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitVitals()">
+        <span class="material-symbols-outlined" style="font-size:16px;">save</span> Log Vitals
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     TOAST CONTAINER
+     ════════════════════════════════════════════════════════ -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="app.js"></script>
+<script>
+  // Make dashboard grid responsive
+  function applyResponsiveGrids() {
+    const dashGrid = document.getElementById('dash-main-grid');
+    if (dashGrid) {
+      dashGrid.style.gridTemplateColumns = window.innerWidth >= 1024 ? 'repeat(2,1fr)' : '1fr';
+    }
+    const mealGrid = document.getElementById('meal-planner-grid');
+    if (mealGrid) {
+      if (window.innerWidth >= 1280) mealGrid.style.gridTemplateColumns = 'repeat(4,1fr)';
+      else if (window.innerWidth >= 768) mealGrid.style.gridTemplateColumns = 'repeat(2,1fr)';
+      else mealGrid.style.gridTemplateColumns = '1fr';
+    }
+  }
+  applyResponsiveGrids();
+  window.addEventListener('resize', applyResponsiveGrids);
+</script>
+</body>
+</html>

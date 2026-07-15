@@ -371,6 +371,153 @@
     </div>
   </section>
 
+  <!-- ===== HYDRATION TRACKER APP SECTION ===== -->
+  <section class="section-py" id="hydration-app" style="background:linear-gradient(135deg,#0a1a10 0%,#006b2f 60%,#1a3326 100%);overflow:hidden;position:relative;">
+
+    <!-- Decorative dots -->
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 2px 2px,rgba(255,255,255,0.06) 1px,transparent 0);background-size:28px 28px;pointer-events:none;"></div>
+    <!-- Glow -->
+    <div style="position:absolute;top:-120px;right:-60px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(93,187,70,0.15) 0%,transparent 70%);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-80px;left:-40px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(245,179,53,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+
+    <div class="container" style="position:relative;z-index:1;">
+      <div style="display:grid;grid-template-columns:1fr;gap:64px;align-items:center;" id="app-showcase-grid">
+
+        <!-- Left: Text + CTA -->
+        <div class="fade-up">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(93,187,70,0.15);border-radius:9999px;color:#5dbb46;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;border:1px solid rgba(93,187,70,0.25);">
+            <span style="width:6px;height:6px;border-radius:50%;background:#5dbb46;display:inline-block;animation:pulse 2s infinite;"></span>
+            New App — Live Now
+          </div>
+
+          <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;color:white;line-height:1.15;margin-bottom:20px;">
+            Hydration Tracker<br/>
+            <span style="color:#5dbb46;font-style:italic;">Daily Pulse App</span>
+          </h2>
+
+          <p style="font-size:17px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:36px;max-width:480px;">
+            A science-backed wellness companion built by NOVA Nourish. Track hydration, calculate your calories, plan weekly meals, and build healthy habits — all in one beautiful, 5-page app.
+          </p>
+
+          <!-- Feature bullets -->
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(93,187,70,0.15);border:1px solid rgba(93,187,70,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#5dbb46;">water_drop</span>
+              </div>
+              <span style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:500;">Real-time hydration tracking with animated water visualiser</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,179,53,0.12);border:1px solid rgba(245,179,53,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#f5b335;">calculate</span>
+              </div>
+              <span style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:500;">Harris-Benedict calorie & macro calculator</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(93,187,70,0.15);border:1px solid rgba(93,187,70,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#5dbb46;">restaurant_menu</span>
+              </div>
+              <span style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:500;">Interactive 7-day meal planner with auto-fill</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(93,187,70,0.15);border:1px solid rgba(93,187,70,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#5dbb46;">analytics</span>
+              </div>
+              <span style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:500;">7-day habit grid with streak tracking</span>
+            </div>
+          </div>
+
+          <!-- Pages badges -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;">
+            <span style="padding:5px 12px;border-radius:9999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);font-size:12px;font-weight:500;">📊 Dashboard</span>
+            <span style="padding:5px 12px;border-radius:9999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);font-size:12px;font-weight:500;">💧 Hydration</span>
+            <span style="padding:5px 12px;border-radius:9999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);font-size:12px;font-weight:500;">🔥 Calories</span>
+            <span style="padding:5px 12px;border-radius:9999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);font-size:12px;font-weight:500;">🍽️ Meal Planner</span>
+            <span style="padding:5px 12px;border-radius:9999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);font-size:12px;font-weight:500;">✅ Habit Tracker</span>
+          </div>
+
+          <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <a href="hydration-tracker/index.html" class="btn" style="background:#5dbb46;color:white;font-size:16px;padding:14px 32px;border-radius:9999px;font-weight:700;box-shadow:0 8px 32px rgba(93,187,70,0.35);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(93,187,70,0.45)';" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(93,187,70,0.35)';">
+              <span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span>
+              Launch App
+            </a>
+            <a href="hydration-tracker/index.html#page-hydration" class="btn" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);border:1.5px solid rgba(255,255,255,0.2);font-size:15px;padding:13px 24px;border-radius:9999px;">
+              Try Hydration Tracker
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: App Preview Card -->
+        <div class="fade-up" style="display:flex;justify-content:center;">
+          <div style="width:100%;max-width:420px;background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);border-radius:24px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.4);">
+            <!-- App bar -->
+            <div style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:12px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:#006b2f;display:flex;align-items:center;justify-content:center;">
+                <span class="material-symbols-outlined" style="font-size:18px;color:white;">water_drop</span>
+              </div>
+              <div>
+                <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:white;">Hydration Tracker</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.5);">Daily Pulse by NOVA Nourish</p>
+              </div>
+              <div style="margin-left:auto;display:flex;gap:6px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.15);"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.15);"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:#5dbb46;"></div>
+              </div>
+            </div>
+            <!-- App preview content -->
+            <div style="padding:24px;">
+              <!-- Mini stats -->
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px;">
+                <div style="background:rgba(0,107,47,0.3);border-radius:12px;padding:14px;">
+                  <p style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:4px;font-weight:600;">HYDRATION</p>
+                  <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:700;color:#5dbb46;">1.85L</p>
+                  <p style="font-size:11px;color:rgba(255,255,255,0.5);">of 2.5L goal</p>
+                </div>
+                <div style="background:rgba(245,179,53,0.15);border-radius:12px;padding:14px;">
+                  <p style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:4px;font-weight:600;">CALORIES</p>
+                  <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:700;color:#f5b335;">1,420</p>
+                  <p style="font-size:11px;color:rgba(255,255,255,0.5);">of 1,900 kcal</p>
+                </div>
+              </div>
+              <!-- Progress -->
+              <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:8px;font-weight:600;">TODAY'S PROGRESS</p>
+              <div style="height:8px;background:rgba(255,255,255,0.1);border-radius:9999px;margin-bottom:6px;overflow:hidden;">
+                <div style="height:100%;width:74%;background:linear-gradient(to right,#006b2f,#5dbb46);border-radius:9999px;"></div>
+              </div>
+              <p style="font-size:12px;color:rgba(255,255,255,0.5);text-align:right;margin-bottom:20px;">74% — Great progress!</p>
+              <!-- Habit dots -->
+              <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:10px;font-weight:600;">HABITS THIS WEEK</p>
+              <div style="display:flex;gap:6px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#006b2f;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:14px;color:white;">check</span>
+                </div>
+                <div style="width:32px;height:32px;border-radius:8px;background:#006b2f;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:14px;color:white;">check</span>
+                </div>
+                <div style="width:32px;height:32px;border-radius:8px;background:#006b2f;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:14px;color:white;">check</span>
+                </div>
+                <div style="width:32px;height:32px;border-radius:8px;background:#006b2f;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:14px;color:white;">check</span>
+                </div>
+                <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"></div>
+                <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"></div>
+                <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"></div>
+              </div>
+              <!-- CTA -->
+              <a href="hydration-tracker/index.html" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:12px;background:#5dbb46;color:white;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
+                Open Hydration Tracker App
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- ===== FOOTER ===== -->
