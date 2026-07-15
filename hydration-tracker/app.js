@@ -60,7 +60,7 @@ function navigateTo(pageId) {
   // Page-specific init
   if (pageId === 'dashboard') renderDashboard();
   if (pageId === 'hydration') renderHydration();
-  if (pageId === 'calories') renderCalories();
+  if (pageId === 'calories') initCaloriesPage();
   if (pageId === 'habits') renderHabits();
   if (pageId === 'meal') renderMealPlanner();
 
@@ -216,6 +216,12 @@ function updateMilestones() {
 /* ============================================================
    CALORIE CALCULATOR
    ============================================================ */
+
+function initCaloriesPage() {
+  // Reset result panel on each visit so user sees fresh state
+  const results = document.getElementById('cal-results');
+  if (results) results.classList.add('hidden');
+}
 function calculateCalories() {
   const weight = parseFloat(document.getElementById('cal-weight')?.value) || 70;
   const height = parseFloat(document.getElementById('cal-height')?.value) || 170;
